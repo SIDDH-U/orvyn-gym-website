@@ -78,8 +78,8 @@ export function MobileStickyBar() {
             {/* Slimmer (48px) Round Call Button */}
             <a
               href={`tel:${siteConfig.phoneRaw}`}
-              aria-label="Call ORVYN Gym"
-              className="flex h-12 w-12 min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#15171B] text-white shadow-md active:scale-95 transition-transform hover:border-[#E4FF1A] hover:text-[#E4FF1A]"
+              aria-label={`Call ${siteConfig.name}`}
+              className="flex h-12 w-12 min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#15171B] text-white shadow-md active:scale-95 transition-transform hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)]"
             >
               <Phone className="h-4 w-4" />
             </a>

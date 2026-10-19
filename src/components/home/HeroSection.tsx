@@ -65,7 +65,7 @@ export function HeroSection() {
             <div className="hidden md:block w-full h-full relative">
               <Image
                 src={siteConfig.images.heroDesktop}
-                alt="ORVYN Elite Athlete Training"
+                alt={`${siteConfig.name} Elite Athlete Training`}
                 fill
                 priority
                 sizes="100vw"
@@ -81,7 +81,7 @@ export function HeroSection() {
             <div className="block md:hidden w-full h-full relative">
               <Image
                 src={siteConfig.images.heroMobile}
-                alt="ORVYN Athlete Training"
+                alt={`${siteConfig.name} Athlete Training`}
                 fill
                 priority
                 sizes="100vw"
@@ -127,9 +127,9 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center justify-center gap-2 mb-3"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#DFFF00]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-headline-accent,#DFFF00)]" />
             <span className="text-xs font-semibold tracking-widest text-[#A1A5AD] uppercase">
-              DISCIPLINE BUILDS FREEDOM
+              {siteConfig.heroBadge}
             </span>
           </motion.div>
 
@@ -141,8 +141,8 @@ export function HeroSection() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
               className="font-display font-extrabold uppercase leading-[0.92] tracking-tight text-center text-[clamp(52px,6.2vw,86px)] lg:whitespace-nowrap drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
             >
-              <span className="text-white">TRAIN HARDER. </span>
-              <span className="text-[#DFFF00]">LIVE STRONGER.</span>
+              <span className="text-white">{siteConfig.heroHeadline.line1}{" "}</span>
+              <span className="text-[var(--color-headline-accent,#DFFF00)]">{siteConfig.heroHeadline.line2}</span>
             </motion.h1>
           </div>
 
@@ -169,7 +169,7 @@ export function HeroSection() {
           >
             <button
               onClick={() => openModal()}
-              className="group flex min-h-[50px] items-center justify-center gap-2 rounded-full bg-[#DFFF00] px-8 py-3.5 text-sm font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#ccee00] active:scale-[0.98] glow-yellow shadow-xl"
+              className="group flex min-h-[50px] items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#DFFF00)] px-8 py-3.5 text-sm font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow shadow-xl"
             >
               <span>START FREE TRIAL</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -177,27 +177,24 @@ export function HeroSection() {
           </motion.div>
 
           {/* Desktop Statistics: Single row with neon lime dots & subtle vertical dividers */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="mt-6 flex items-center justify-center gap-6 lg:gap-8 text-xs font-bold uppercase tracking-wider text-white"
-          >
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#DFFF00]" />
-              12+ COACHES
-            </span>
-            <span className="h-3.5 w-px bg-white/20" />
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#DFFF00]" />
-              5AM–11PM OPEN DAILY
-            </span>
-            <span className="h-3.5 w-px bg-white/20" />
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#DFFF00]" />
-              60+ MACHINES
-            </span>
-          </motion.div>
+          {siteConfig.sections.showStats && siteConfig.stats.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="mt-6 flex items-center justify-center gap-6 lg:gap-8 text-xs font-bold uppercase tracking-wider text-white"
+            >
+              {siteConfig.stats.slice(0, 3).map((stat, sIdx) => (
+                <React.Fragment key={stat.label}>
+                  {sIdx > 0 && <span className="h-3.5 w-px bg-white/20" />}
+                  <span className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-headline-accent,#DFFF00)]" />
+                    {stat.value} {stat.label}
+                  </span>
+                </React.Fragment>
+              ))}
+            </motion.div>
+          )}
 
           {/* Desktop Scroll Cue */}
           <motion.div
@@ -208,7 +205,7 @@ export function HeroSection() {
             aria-hidden="true"
           >
             <span className="text-[10px] font-bold uppercase tracking-widest">SCROLL</span>
-            <ChevronDown className="h-3.5 w-3.5 text-[#DFFF00] mt-0.5 animate-bounce" />
+            <ChevronDown className="h-3.5 w-3.5 text-[var(--color-headline-accent,#DFFF00)] mt-0.5 animate-bounce" />
           </motion.div>
         </div>
       </div>
@@ -227,9 +224,9 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="flex items-center justify-center gap-2 mb-2.5"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#DFFF00]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-headline-accent,#DFFF00)]" />
               <span className="text-[11px] font-semibold tracking-widest text-[#A1A5AD] uppercase">
-                DISCIPLINE BUILDS FREEDOM
+                {siteConfig.heroBadge}
               </span>
             </motion.div>
 
@@ -241,10 +238,10 @@ export function HeroSection() {
               className="font-display font-extrabold uppercase tracking-tight text-center flex flex-col items-center drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
             >
               <span className="text-white text-[clamp(44px,11.5vw,52px)] leading-[0.96] block whitespace-nowrap">
-                TRAIN HARDER.
+                {siteConfig.heroHeadline.line1}
               </span>
-              <span className="text-[#DFFF00] text-[clamp(44px,11.5vw,52px)] leading-[0.96] block whitespace-nowrap mt-[0.16em]">
-                LIVE STRONGER.
+              <span className="text-[var(--color-headline-accent,#DFFF00)] text-[clamp(44px,11.5vw,52px)] leading-[0.96] block whitespace-nowrap mt-[0.16em]">
+                {siteConfig.heroHeadline.line2}
               </span>
             </motion.h1>
 
@@ -269,7 +266,7 @@ export function HeroSection() {
           >
             <button
               onClick={() => openModal()}
-              className="group flex min-h-[48px] w-full max-w-[280px] xs:max-w-[300px] items-center justify-center gap-2 rounded-full bg-[#DFFF00] px-7 py-3.5 text-xs font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#ccee00] active:scale-[0.98] glow-yellow shadow-xl"
+              className="group flex min-h-[48px] w-full max-w-[280px] xs:max-w-[300px] items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#DFFF00)] px-7 py-3.5 text-xs font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow shadow-xl"
             >
               <span>START FREE TRIAL</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -277,45 +274,31 @@ export function HeroSection() {
           </motion.div>
 
           {/* 3. Three Integrated Statistics Columns (Directly on background, no black pill) */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.55 }}
-            className="mt-5 w-full max-w-[320px] xs:max-w-[350px] mx-auto grid grid-cols-3 divide-x divide-white/10 text-center"
-          >
-            {/* Column 1 */}
-            <div className="flex flex-col items-center px-1.5">
-              <Users className="h-4 w-4 xs:h-5 xs:w-5 text-[#DFFF00] mb-1" />
-              <span className="font-display text-base xs:text-lg font-extrabold text-white leading-tight">
-                12+
-              </span>
-              <span className="text-[10px] font-bold tracking-wider text-[#A1A5AD] uppercase mt-0.5">
-                COACHES
-              </span>
-            </div>
-
-            {/* Column 2 */}
-            <div className="flex flex-col items-center px-1.5">
-              <Clock className="h-4 w-4 xs:h-5 xs:w-5 text-[#DFFF00] mb-1" />
-              <span className="font-display text-base xs:text-lg font-extrabold text-white leading-tight">
-                5AM–11PM
-              </span>
-              <span className="text-[10px] font-bold tracking-wider text-[#A1A5AD] uppercase mt-0.5">
-                OPEN DAILY
-              </span>
-            </div>
-
-            {/* Column 3 */}
-            <div className="flex flex-col items-center px-1.5">
-              <Dumbbell className="h-4 w-4 xs:h-5 xs:w-5 text-[#DFFF00] mb-1" />
-              <span className="font-display text-base xs:text-lg font-extrabold text-white leading-tight">
-                60+
-              </span>
-              <span className="text-[10px] font-bold tracking-wider text-[#A1A5AD] uppercase mt-0.5">
-                MACHINES
-              </span>
-            </div>
-          </motion.div>
+          {siteConfig.sections.showStats && siteConfig.stats.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.55 }}
+              className={`mt-5 w-full max-w-[320px] xs:max-w-[350px] mx-auto grid ${
+                siteConfig.stats.length === 1 ? "grid-cols-1" : siteConfig.stats.length === 2 ? "grid-cols-2" : "grid-cols-3"
+              } divide-x divide-white/10 text-center`}
+            >
+              {siteConfig.stats.slice(0, 3).map((stat, sIdx) => {
+                const StatIcon = sIdx === 0 ? Users : sIdx === 1 ? Clock : Dumbbell;
+                return (
+                  <div key={stat.label} className="flex flex-col items-center px-1.5">
+                    <StatIcon className="h-4 w-4 xs:h-5 xs:w-5 text-[var(--color-headline-accent,#DFFF00)] mb-1" />
+                    <span className="font-display text-base xs:text-lg font-extrabold text-white leading-tight">
+                      {stat.value}
+                    </span>
+                    <span className="text-[10px] font-bold tracking-wider text-[#A1A5AD] uppercase mt-0.5">
+                      {stat.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </motion.div>
+          )}
 
         </div>
 
@@ -328,7 +311,7 @@ export function HeroSection() {
           aria-hidden="true"
         >
           <span className="text-[9px] font-bold uppercase tracking-widest">SCROLL</span>
-          <ChevronDown className="h-3 w-3 text-[#DFFF00] mt-0.5 animate-bounce" />
+          <ChevronDown className="h-3 w-3 text-[var(--color-headline-accent,#DFFF00)] mt-0.5 animate-bounce" />
         </motion.div>
       </div>
 

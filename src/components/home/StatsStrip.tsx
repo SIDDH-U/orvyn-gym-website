@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Users, Clock, Dumbbell } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { SampleBadge } from "@/components/ui/SampleBadge";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -41,10 +42,21 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
 
 export function StatsStrip() {
   const icons = [
-    <Users key="users" className="h-5 w-5 text-[#E4FF1A] stroke-[1.5]" />,
-    <Clock key="clock" className="h-5 w-5 text-[#E4FF1A] stroke-[1.5]" />,
-    <Dumbbell key="dumbbell" className="h-5 w-5 text-[#E4FF1A] stroke-[1.5]" />,
+    <Users key="users" className="h-5 w-5 text-[var(--color-accent,#E4FF1A)] stroke-[1.5]" />,
+    <Clock key="clock" className="h-5 w-5 text-[var(--color-accent,#E4FF1A)] stroke-[1.5]" />,
+    <Dumbbell key="dumbbell" className="h-5 w-5 text-[var(--color-accent,#E4FF1A)] stroke-[1.5]" />,
   ];
+
+  if (!siteConfig.sections.showStats || siteConfig.stats.length === 0) {
+    return null;
+  }
+
+  const gridColsClass =
+    siteConfig.stats.length === 1
+      ? "grid-cols-1"
+      : siteConfig.stats.length === 2
+      ? "grid-cols-2"
+      : "grid-cols-3";
 
   return (
     <section className="relative w-full py-6 md:py-10 bg-[#0B0C0E]">
@@ -54,18 +66,24 @@ export function StatsStrip() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="rounded-[20px] border border-white/10 bg-[#15171B] p-4 sm:p-6 shadow-xl"
+          className="relative rounded-[20px] border border-white/10 bg-[#15171B] p-4 sm:p-6 shadow-xl"
         >
-          <div className="grid grid-cols-3 divide-x divide-white/10">
+          {siteConfig.sampleMode && (
+            <div className="absolute top-2 right-3 z-10">
+              <SampleBadge />
+            </div>
+          )}
+
+          <div className={`grid ${gridColsClass} divide-x divide-white/10`}>
             {siteConfig.stats.map((stat, idx) => (
               <div
                 key={stat.label}
                 className="flex flex-col items-center sm:items-start text-center sm:text-left px-2 sm:px-6 first:pl-0 last:pr-0"
               >
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2.5 sm:gap-4">
-                  {/* Icon (hidden on smallest screens to keep mobile extremely clean) */}
-                  <div className="hidden xs:flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border border-[#E4FF1A]/20 bg-[#E4FF1A]/10">
-                    {icons[idx]}
+                  {/* Icon */}
+                  <div className="hidden xs:flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-accent,#E4FF1A)]/20 bg-[var(--color-accent,#E4FF1A)]/10">
+                    {icons[idx % icons.length]}
                   </div>
 
                   {/* Content */}

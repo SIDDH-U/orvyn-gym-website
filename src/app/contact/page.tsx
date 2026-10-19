@@ -79,7 +79,7 @@ export default function ContactPage() {
               </span>
             </div>
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.95]">
-              CONNECT WITH <span className="text-[#E4FF1A]">ORVYN.</span>
+              CONNECT WITH <span className="text-[var(--color-headline-accent,#E4FF1A)]">{siteConfig.name}.</span>
             </h1>
             <p className="mt-4 text-base sm:text-lg text-[#A1A5AD] leading-relaxed">
               Stop by for a tour, ask a question, or talk to an expert coach about your training goals. We are ready when you are.
@@ -319,47 +319,61 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 3. MAP PLACEHOLDER BLOCK WITH "OPEN IN MAPS" BUTTON */}
-      <section className="relative w-full pb-20 md:pb-28">
-        <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
-          <div className="relative w-full h-[320px] sm:h-[420px] rounded-[20px] overflow-hidden border border-white/10 bg-[#121418] shadow-2xl flex items-center justify-center">
-            {/* Dark Styled Map Grid Graphics */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#E4FF1A_1px,transparent_1px)] [background-size:24px_24px]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B0C0E]/50 to-[#0B0C0E]/90 pointer-events-none" />
+      {/* 3. MAP BLOCK WITH "OPEN IN MAPS" BUTTON */}
+      {siteConfig.sections.showMap && (
+        <section className="relative w-full pb-20 md:pb-28">
+          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
+            <div className="relative w-full h-[320px] sm:h-[420px] rounded-[20px] overflow-hidden border border-white/10 bg-[#121418] shadow-2xl flex items-center justify-center">
+              {siteConfig.address.embedMapUrl ? (
+                <iframe
+                  src={siteConfig.address.embedMapUrl}
+                  title="Gym Location Map"
+                  className="w-full h-full border-0 grayscale contrast-125 opacity-80"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              ) : (
+                <>
+                  {/* Dark Styled Map Grid Graphics */}
+                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(var(--color-accent,#E4FF1A)_1px,transparent_1px)] [background-size:24px_24px]" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B0C0E]/50 to-[#0B0C0E]/90 pointer-events-none" />
 
-            {/* Stylized Street Lines */}
-            <svg className="absolute inset-0 w-full h-full opacity-15" preserveAspectRatio="none">
-              <path d="M0,100 L400,100 L600,250 L1200,250" stroke="#FFFFFF" strokeWidth="2" fill="none" />
-              <path d="M200,0 L200,420" stroke="#FFFFFF" strokeWidth="2" fill="none" />
-              <path d="M800,0 L800,420" stroke="#FFFFFF" strokeWidth="2" fill="none" />
-              <path d="M0,320 L1200,320" stroke="#E4FF1A" strokeWidth="1.5" fill="none" strokeDasharray="6 6" />
-            </svg>
+                  {/* Stylized Street Lines */}
+                  <svg className="absolute inset-0 w-full h-full opacity-15" preserveAspectRatio="none">
+                    <path d="M0,100 L400,100 L600,250 L1200,250" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                    <path d="M200,0 L200,420" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                    <path d="M800,0 L800,420" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                    <path d="M0,320 L1200,320" stroke="var(--color-accent,#E4FF1A)" strokeWidth="1.5" fill="none" strokeDasharray="6 6" />
+                  </svg>
 
-            {/* Gym Location Pin & Beacon */}
-            <div className="relative z-10 flex flex-col items-center text-center p-6 bg-[#0B0C0E]/90 backdrop-blur-md rounded-[20px] border border-white/15 max-w-sm shadow-2xl">
-              <div className="relative mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#E4FF1A] text-[#0B0C0E] shadow-[0_0_20px_rgba(228,255,26,0.5)] animate-bounce">
-                <MapPin className="h-6 w-6 stroke-[2.5]" />
-              </div>
-              <h3 className="font-display text-2xl font-extrabold uppercase text-white">
-                {siteConfig.name} HEADQUARTERS
-              </h3>
-              <p className="mt-1 text-xs text-[#A1A5AD]">
-                {siteConfig.address.full}
-              </p>
+                  {/* Gym Location Pin & Beacon */}
+                  <div className="relative z-10 flex flex-col items-center text-center p-6 bg-[#0B0C0E]/90 backdrop-blur-md rounded-[20px] border border-white/15 max-w-sm shadow-2xl">
+                    <div className="relative mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-[0_0_20px_var(--color-glow,rgba(228,255,26,0.5))] animate-bounce">
+                      <MapPin className="h-6 w-6 stroke-[2.5]" />
+                    </div>
+                    <h3 className="font-display text-2xl font-extrabold uppercase text-white">
+                      {siteConfig.name} HEADQUARTERS
+                    </h3>
+                    <p className="mt-1 text-xs text-[#A1A5AD]">
+                      {siteConfig.address.full}
+                    </p>
 
-              <a
-                href={siteConfig.address.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 flex min-h-[44px] items-center gap-2 rounded-full bg-[#E4FF1A] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow-sm"
-              >
-                <span>OPEN IN GOOGLE MAPS</span>
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+                    <a
+                      href={siteConfig.address.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 flex min-h-[44px] items-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow-sm"
+                    >
+                      <span>OPEN IN GOOGLE MAPS</span>
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
     </div>
   );

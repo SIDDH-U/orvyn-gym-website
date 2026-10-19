@@ -58,7 +58,7 @@ export function FinalCtaSection() {
       <div className="absolute inset-0 z-0">
         <Photo
           src={siteConfig.images.ctaGroup}
-          alt="ORVYN Athletes Community"
+          alt={`${siteConfig.name} Athletes Community`}
           fill
           sizes="100vw"
           className="opacity-75 object-cover object-center"
@@ -74,15 +74,15 @@ export function FinalCtaSection() {
         <div className="max-w-2xl">
           {/* Eyebrow */}
           <div className="flex items-center gap-2 mb-2 sm:mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
               BUILT TOGETHER
             </span>
           </div>
 
-          {/* Headline (second line yellow) */}
+          {/* Headline (second line accent) */}
           <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.92]">
-            FIND YOUR <span className="text-[#E4FF1A]">PEOPLE.</span>
+            FIND YOUR <span className="text-[var(--color-headline-accent,#E4FF1A)]">PEOPLE.</span>
           </h2>
 
           {/* Short Line */}
@@ -94,7 +94,7 @@ export function FinalCtaSection() {
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 max-w-xl">
               <div className="flex flex-col sm:flex-row items-stretch gap-3">
-                {/* Name Input - 20px padding left (px-5), no icon gap */}
+                {/* Name Input */}
                 <div className="flex-1 relative">
                   <input
                     type="text"
@@ -107,7 +107,7 @@ export function FinalCtaSection() {
                     className={`w-full h-12 rounded-full border bg-[#15171B]/95 px-5 text-sm text-white placeholder-gray-400 backdrop-blur-md transition-colors focus:outline-none focus:ring-2 ${
                       nameError
                         ? "border-red-500 focus:ring-red-500"
-                        : "border-white/20 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                        : "border-white/20 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                     }`}
                   />
                   {nameError && (
@@ -117,7 +117,7 @@ export function FinalCtaSection() {
                   )}
                 </div>
 
-                {/* Phone Input - 20px padding left (px-5), no icon gap */}
+                {/* Phone Input */}
                 <div className="flex-1 relative mt-2 sm:mt-0">
                   <input
                     type="tel"
@@ -130,7 +130,7 @@ export function FinalCtaSection() {
                     className={`w-full h-12 rounded-full border bg-[#15171B]/95 px-5 text-sm text-white placeholder-gray-400 backdrop-blur-md transition-colors focus:outline-none focus:ring-2 ${
                       phoneError
                         ? "border-red-500 focus:ring-red-500"
-                        : "border-white/20 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                        : "border-white/20 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                     }`}
                   />
                   {phoneError && (
@@ -140,10 +140,10 @@ export function FinalCtaSection() {
                   )}
                 </div>
 
-                {/* Yellow CTA Button */}
+                {/* CTA Button */}
                 <button
                   type="submit"
-                  className="group flex min-h-[48px] h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-[#E4FF1A] px-6 sm:px-8 text-sm font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow shadow-xl mt-2 sm:mt-0"
+                  className="group flex min-h-[48px] h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-6 sm:px-8 text-sm font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow shadow-xl mt-2 sm:mt-0"
                 >
                   <span>CLAIM FREE PASS</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -156,8 +156,8 @@ export function FinalCtaSection() {
             </form>
           ) : (
             /* Success confirmation */
-            <div className="mt-6 sm:mt-8 rounded-[20px] border border-[#E4FF1A]/30 bg-[#15171B]/95 p-5 sm:p-6 backdrop-blur-md max-w-lg">
-              <div className="flex items-center gap-3 text-[#E4FF1A]">
+            <div className="mt-6 sm:mt-8 rounded-[20px] border border-[var(--color-accent,#E4FF1A)]/30 bg-[#15171B]/95 p-5 sm:p-6 backdrop-blur-md max-w-lg">
+              <div className="flex items-center gap-3 text-[var(--color-accent,#E4FF1A)]">
                 <CheckCircle className="h-6 w-6 shrink-0" />
                 <h3 className="font-display text-xl font-bold uppercase text-white">
                   Pass Requested Successfully!

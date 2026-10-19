@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0B0C0E;
-  --color-surface: #15171B;
-  --color-surface-card: #191B20;
-  --color-accent: #E4FF1A;
-  --color-accent-hover: #D4EF0E;
+  --color-background: var(--color-background, #0B0C0E);
+  --color-surface: var(--color-surface, #15171B);
+  --color-surface-card: var(--color-surface-card, #191B20);
+  --color-accent: var(--color-accent, #E4FF1A);
+  --color-accent-hover: var(--color-accent-hover, #D4EF0E);
+  --color-cta: var(--color-cta, #E4FF1A);
+  --color-cta-text: var(--color-cta-text, #0B0C0E);
   --color-text-primary: #FFFFFF;
   --color-text-muted: #A1A5AD;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
@@ -14,12 +16,73 @@
   --font-body: var(--font-body), "Inter", sans-serif;
 }
 
-:root {
-  --bg-primary: #0B0C0E;
-  --bg-surface: #15171B;
+/* =========================================================================
+   THEME PRESETS (Volt, Ember, Crimson, Ice)
+   Accessible contrast tokens for backgrounds, cards, CTA text, glow and sweep
+   ========================================================================= */
+
+:root, [data-theme="volt"] {
+  --color-background: #0B0C0E;
+  --color-surface: #15171B;
+  --color-surface-card: #191B20;
+  --color-accent: #E4FF1A;
+  --color-accent-hover: #D4EF0E;
+  --color-cta: #E4FF1A;
+  --color-cta-text: #0B0C0E;
+  --color-headline-accent: #DFFF00;
+  --color-glow: rgba(228, 255, 26, 0.35);
+  --color-glow-sm: rgba(228, 255, 26, 0.22);
+  --sweep-core: rgba(255, 255, 230, 0.14);
+  --sweep-accent: rgba(228, 255, 26, 0.10);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --accent-yellow: #E4FF1A;
-  --text-muted: #A1A5AD;
+}
+
+[data-theme="ember"] {
+  --color-background: #0B0C0E;
+  --color-surface: #15171B;
+  --color-surface-card: #191B20;
+  --color-accent: #FF6600;
+  --color-accent-hover: #E55B00;
+  --color-cta: #FF6600;
+  --color-cta-text: #0B0C0E;
+  --color-headline-accent: #FF7700;
+  --color-glow: rgba(255, 102, 0, 0.38);
+  --color-glow-sm: rgba(255, 102, 0, 0.22);
+  --sweep-core: rgba(255, 240, 230, 0.14);
+  --sweep-accent: rgba(255, 102, 0, 0.10);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="crimson"] {
+  --color-background: #0B0C0E;
+  --color-surface: #15171B;
+  --color-surface-card: #191B20;
+  --color-accent: #FF2A4D;
+  --color-accent-hover: #E61A3D;
+  --color-cta: #FF2A4D;
+  --color-cta-text: #FFFFFF;
+  --color-headline-accent: #FF3355;
+  --color-glow: rgba(255, 42, 77, 0.38);
+  --color-glow-sm: rgba(255, 42, 77, 0.22);
+  --sweep-core: rgba(255, 235, 240, 0.14);
+  --sweep-accent: rgba(255, 42, 77, 0.10);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="ice"] {
+  --color-background: #0B0C0E;
+  --color-surface: #15171B;
+  --color-surface-card: #191B20;
+  --color-accent: #00E5FF;
+  --color-accent-hover: #00C9E0;
+  --color-cta: #00E5FF;
+  --color-cta-text: #0B0C0E;
+  --color-headline-accent: #00F0FF;
+  --color-glow: rgba(0, 229, 255, 0.38);
+  --color-glow-sm: rgba(0, 229, 255, 0.22);
+  --sweep-core: rgba(230, 252, 255, 0.14);
+  --sweep-accent: rgba(0, 229, 255, 0.10);
+  --border-subtle: rgba(255, 255, 255, 0.08);
 }
 
 .font-display {
@@ -28,7 +91,7 @@
 }
 
 body {
-  background-color: #0B0C0E;
+  background-color: var(--color-background, #0B0C0E);
   color: #FFFFFF;
   font-family: var(--font-body), "Inter", sans-serif;
 }
@@ -59,13 +122,13 @@ body {
   filter: contrast(1.1) brightness(0.92) saturate(0.85);
 }
 
-/* Yellow Glow */
+/* Glow Tokens */
 .glow-yellow {
-  box-shadow: 0 0 25px rgba(228, 255, 26, 0.35);
+  box-shadow: 0 0 25px var(--color-glow, rgba(228, 255, 26, 0.35));
 }
 
 .glow-yellow-sm {
-  box-shadow: 0 0 12px rgba(228, 255, 26, 0.25);
+  box-shadow: 0 0 12px var(--color-glow-sm, rgba(228, 255, 26, 0.22));
 }
 
 /* Marquee Animation */
@@ -78,7 +141,7 @@ body {
   animation: marquee 22s linear infinite;
 }
 
-/* ================= HERO LIGHT SWEEP (CSS ONLY) ================= */
+/* ================= HERO LIGHT SWEEP (CSS ONLY, TOKENIZED) ================= */
 @keyframes heroLightSweep {
   0% {
     transform: skewX(-20deg) translateX(-180%);
@@ -120,9 +183,9 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(228, 255, 26, 0.10) 25%,
-    rgba(255, 255, 230, 0.14) 50%,
-    rgba(228, 255, 26, 0.10) 75%,
+    var(--sweep-accent, rgba(228, 255, 26, 0.10)) 25%,
+    var(--sweep-core, rgba(255, 255, 230, 0.14)) 50%,
+    var(--sweep-accent, rgba(228, 255, 26, 0.10)) 75%,
     transparent 100%
   );
   mix-blend-mode: screen;

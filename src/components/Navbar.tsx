@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, MessageSquare } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useModal } from "@/context/ModalContext";
+import { GymLogo } from "@/components/ui/GymLogo";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -71,13 +72,16 @@ export function Navbar() {
       return;
     }
 
-    const sectionIds = ["about", "programs", "coaches", "plans", "reviews"];
+    const sectionIds = siteConfig.navLinks
+      .filter((l) => l.targetId)
+      .map((l) => l.targetId as string);
 
     const handleScrollSpy = () => {
       const heroThreshold = window.innerHeight * 0.4;
 
-      // When hero is in view (before #about has crossed 40% of viewport), NO nav link is active
-      const firstSection = document.getElementById("about");
+      // When hero is in view (before first visible section has crossed 40% of viewport), NO nav link is active
+      const firstSectionId = sectionIds[0];
+      const firstSection = firstSectionId ? document.getElementById(firstSectionId) : null;
       if (firstSection) {
         const firstRect = firstSection.getBoundingClientRect();
         if (firstRect.top > heroThreshold) {
@@ -178,10 +182,7 @@ export function Navbar() {
             }}
             className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-[#E4FF1A] rounded-full px-2 py-1 shrink-0"
           >
-            <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase">
-              {siteConfig.name}
-            </span>
-            <span className="h-2 w-2 rounded-full bg-[#E4FF1A] transition-transform group-hover:scale-125" />
+            <GymLogo size="md" />
           </Link>
 
           {/* Desktop Nav Links (Visible only on 1024px+ to avoid cramping) */}
@@ -260,10 +261,7 @@ export function Navbar() {
                 }}
                 className="flex items-center gap-2"
               >
-                <span className="font-display text-3xl font-extrabold tracking-tight text-white uppercase">
-                  {siteConfig.name}
-                </span>
-                <span className="h-2 w-2 rounded-full bg-[#E4FF1A]" />
+                <GymLogo size="lg" />
               </Link>
 
               <button

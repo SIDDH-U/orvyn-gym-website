@@ -62,16 +62,17 @@ export function ChalkDustCanvas() {
       wCtx.fill();
     }
 
+    const [ar, ag, ab] = siteConfig.themeTokens?.accentRgb || [228, 255, 26];
     const yellowSprite = document.createElement("canvas");
     yellowSprite.width = spriteSize;
     yellowSprite.height = spriteSize;
     const yCtx = yellowSprite.getContext("2d");
     if (yCtx) {
       const grad = yCtx.createRadialGradient(halfSprite, halfSprite, 0, halfSprite, halfSprite, halfSprite);
-      grad.addColorStop(0, "rgba(228, 255, 26, 1)");
-      grad.addColorStop(0.4, "rgba(228, 255, 26, 0.7)");
-      grad.addColorStop(0.85, "rgba(228, 255, 26, 0.2)");
-      grad.addColorStop(1, "rgba(228, 255, 26, 0)");
+      grad.addColorStop(0, `rgba(${ar}, ${ag}, ${ab}, 1)`);
+      grad.addColorStop(0.4, `rgba(${ar}, ${ag}, ${ab}, 0.7)`);
+      grad.addColorStop(0.85, `rgba(${ar}, ${ag}, ${ab}, 0.2)`);
+      grad.addColorStop(1, `rgba(${ar}, ${ag}, ${ab}, 0)`);
       yCtx.fillStyle = grad;
       yCtx.beginPath();
       yCtx.arc(halfSprite, halfSprite, halfSprite, 0, Math.PI * 2);

@@ -17,13 +17,15 @@ export function MembershipsSection() {
   const touchStartXRef = useRef<number | null>(null);
 
   const plans = siteConfig.plans;
-  const currentMobilePlan = plans[selectedMobileIndex];
+  const safeMobileIndex = Math.min(selectedMobileIndex, Math.max(0, plans.length - 1));
+  const currentMobilePlan = plans[safeMobileIndex] || plans[0];
 
-  // Distinct icons for plans
+  // Distinct icons for up to 4 plans
   const planIcons = [
     <Dumbbell key="basic" className="h-5 w-5" />,
     <Crown key="pro" className="h-5 w-5" />,
     <Star key="elite" className="h-5 w-5" />,
+    <Dumbbell key="plan4" className="h-5 w-5" />,
   ];
 
   // Stop autoplay permanently on first interaction
@@ -153,8 +155,16 @@ export function MembershipsSection() {
           </div>
         </div>
 
-        {/* ================= DESKTOP: 3 Cards Side by Side (Equal Heights, Distinct Icons) ================= */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6 items-stretch">
+        {/* ================= DESKTOP: 1-4 Cards Handled Cleanly With No Gaps ================= */}
+        <div className={`hidden md:grid gap-6 items-stretch ${
+          plans.length === 1
+            ? "grid-cols-1 max-w-md mx-auto"
+            : plans.length === 2
+            ? "grid-cols-2 max-w-3xl mx-auto"
+            : plans.length === 3
+            ? "grid-cols-3"
+            : "grid-cols-2 lg:grid-cols-4"
+        }`}>
           {plans.map((plan: Plan, idx: number) => {
             const isPro = plan.popular;
             const price = billingCycle === "yearly" ? plan.yearlyPrice : plan.monthlyPrice;

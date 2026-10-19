@@ -20,6 +20,7 @@ export default function MembershipsPage() {
     <Dumbbell key="basic" className="h-5 w-5" />,
     <Crown key="pro" className="h-5 w-5" />,
     <Star key="elite" className="h-5 w-5" />,
+    <Dumbbell key="plan4" className="h-5 w-5" />,
   ];
 
   return (
@@ -77,7 +78,15 @@ export default function MembershipsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <div className={`grid gap-6 items-stretch ${
+            siteConfig.plans.length === 1
+              ? "grid-cols-1 max-w-md mx-auto"
+              : siteConfig.plans.length === 2
+              ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
+              : siteConfig.plans.length === 3
+              ? "grid-cols-1 md:grid-cols-3"
+              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+          }`}>
             {siteConfig.plans.map((plan: Plan, idx: number) => {
               const isPro = plan.popular;
               const price = billingCycle === "yearly" ? plan.yearlyPrice : plan.monthlyPrice;
@@ -253,70 +262,72 @@ export default function MembershipsPage() {
         </div>
       </section>
 
-      {/* 4. 5-QUESTION FAQ ACCORDION WITH SMOOTH HEIGHT ANIMATION */}
-      <section className="relative w-full pb-12 md:pb-20">
-        <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
-          <div className="mb-8 sm:mb-10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
-                FREQUENTLY ASKED
-              </span>
+      {/* 4. FAQ ACCORDION WITH SMOOTH HEIGHT ANIMATION */}
+      {siteConfig.sections.showFaq && siteConfig.faqs.length > 0 && (
+        <section className="relative w-full pb-12 md:pb-20">
+          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
+            <div className="mb-8 sm:mb-10">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+                <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
+                  FREQUENTLY ASKED
+                </span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
+                GOT QUESTIONS? WE&apos;VE GOT ANSWERS.
+              </h2>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
-              GOT QUESTIONS? WE&apos;VE GOT ANSWERS.
-            </h2>
-          </div>
 
-          <div className="max-w-3xl space-y-3.5">
-            {siteConfig.faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-[20px] border border-white/10 bg-[#15171B] overflow-hidden transition-colors hover:border-white/20"
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    aria-expanded={isOpen}
-                    className="flex w-full min-h-[52px] items-center justify-between p-4 sm:p-5 text-left focus:outline-none focus:ring-1 focus:ring-[#E4FF1A]"
+            <div className="max-w-3xl space-y-3.5">
+              {siteConfig.faqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-[20px] border border-white/10 bg-[#15171B] overflow-hidden transition-colors hover:border-white/20"
                   >
-                    <span className="font-display text-base sm:text-lg font-bold uppercase tracking-tight text-white pr-4">
-                      {faq.question}
-                    </span>
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/5 text-[#E4FF1A]">
-                      {isOpen ? (
-                        <Minus className="h-3.5 w-3.5" />
-                      ) : (
-                        <Plus className="h-3.5 w-3.5" />
-                      )}
-                    </div>
-                  </button>
+                    <button
+                      onClick={() => toggleFaq(idx)}
+                      aria-expanded={isOpen}
+                      className="flex w-full min-h-[52px] items-center justify-between p-4 sm:p-5 text-left focus:outline-none focus:ring-1 focus:ring-[var(--color-accent,#E4FF1A)]"
+                    >
+                      <span className="font-display text-base sm:text-lg font-bold uppercase tracking-tight text-white pr-4">
+                        {faq.question}
+                      </span>
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/5 text-[var(--color-accent,#E4FF1A)]">
+                        {isOpen ? (
+                          <Minus className="h-3.5 w-3.5" />
+                        ) : (
+                          <Plus className="h-3.5 w-3.5" />
+                        )}
+                      </div>
+                    </button>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-[#A1A5AD] leading-relaxed border-t border-white/5">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-[#A1A5AD] leading-relaxed border-t border-white/5">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 5. FINAL CTA BLOCK */}
-      <FinalCtaSection />
+      {siteConfig.sections.showFinalCta && <FinalCtaSection />}
 
     </div>
   );

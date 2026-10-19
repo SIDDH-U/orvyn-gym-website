@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Premium Gym Website Template
 
-## Getting Started
+A mobile-first, high-conversion website for elite gyms, strength clubs, and fitness facilities. Built with **Next.js (App Router)**, **Tailwind CSS v4**, and **Framer Motion**.
 
-First, run the development server:
+Designed so that creating a client-ready website for a new gym takes **under 20 minutes from ONE prompt of details**.
+
+---
+
+## ⚡ Quick Start
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Run local development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 3. Test production build
+npm run build
+
+# 4. Run safety swap check
+npm run check-swap
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) on mobile (~390px) and desktop.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Two-Layer Configuration System
 
-## Learn More
+| Config File | Description | When to Edit |
+| :--- | :--- | :--- |
+| **[`config/gym.config.ts`](./config/gym.config.ts)** | **The ONLY file edited per gym**: Name, phone, WhatsApp number, address, city, hours, theme preset, section flags, and stats. | **Every new gym** (takes < 10 mins). |
+| **[`config/specialty.gym.config.ts`](./config/specialty.gym.config.ts)** | **Specialty content**: Training programs, coaches roster, membership pricing tiers, reviews, FAQs, and marquee text. | Only when changing gym disciplines (e.g. CrossFit, Boxing, Yoga). |
+| **[`config/themes.ts`](./config/themes.ts)** | **Theme Presets**: Color tokens, canvas particle palettes, and accessible CTA contrast. | Core engine (`volt`, `ember`, `crimson`, `ice`). |
+| **[`config/site.ts`](./config/site.ts)** | **Composition Layer**: Merges gym and specialty configurations into a unified `siteConfig` API. | Core engine (do not edit). |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Theme Presets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Switch between 4 high-contrast, accessible themes in `/config/gym.config.ts` (`theme: "volt" | "ember" | "crimson" | "ice"`):
 
-## Deploy on Vercel
+1. **Volt** (Default): Dark industrial with neon lime / electric yellow (`#E4FF1A`)
+2. **Ember**: High-energy dark performance with fiery electric orange (`#FF6600`)
+3. **Crimson**: Aggressive powerlifting red (`#FF2A4D`) with high-contrast white CTA text
+4. **Ice**: Clean cryogenic athletic aesthetic with radiant electric cyan (`#00E5FF`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📖 Complete Swap Runbook & Deployment
+
+See **[`SWAP.md`](./SWAP.md)** for:
+- **Agent Instructions (One-Prompt Mode)** for instant AI automated rebranding
+- **10-Step Human Swap Checklist**
+- **Vercel zero-config deployment instructions**

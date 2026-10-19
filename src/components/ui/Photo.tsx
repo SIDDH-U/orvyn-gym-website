@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image, { ImageProps } from "next/image";
 import { Dumbbell } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 interface PhotoProps extends Omit<ImageProps, "onError"> {
   hasOverlay?: boolean;
@@ -51,7 +52,7 @@ export function Photo({
     >
       <Image
         src={src}
-        alt={alt || "ORVYN Gym"}
+        alt={alt || `${siteConfig.name} Gym`}
         fill={fill}
         priority={priority}
         onError={() => setHasError(true)}

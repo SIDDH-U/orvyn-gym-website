@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { GymLogo } from "@/components/ui/GymLogo";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -51,10 +52,7 @@ export function Footer() {
           {/* Col 1: Brand & Socials */}
           <div className="col-span-2 md:col-span-1 space-y-3.5">
             <Link href="/" className="inline-flex items-center gap-2 group">
-              <span className="font-display text-3xl font-extrabold tracking-tight text-white uppercase">
-                {siteConfig.name}
-              </span>
-              <span className="h-2 w-2 rounded-full bg-[#E4FF1A]" />
+              <GymLogo size="md" showSubtitle />
             </Link>
             <p className="text-xs text-[#A1A5AD] leading-relaxed max-w-sm">
               A premium gym for people who want more from themselves. Train harder. Live stronger.
@@ -107,42 +105,54 @@ export function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-1.5 text-xs sm:text-sm">
+              {siteConfig.sections.showAbout && (
+                <li>
+                  <Link href="/#about" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                    About
+                  </Link>
+                </li>
+              )}
+              {siteConfig.sections.showPrograms && (
+                <li>
+                  <Link href="/#programs" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                    Programs
+                  </Link>
+                </li>
+              )}
+              {siteConfig.sections.showCoaches && (
+                <li>
+                  <Link href="/#coaches" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                    Coaches
+                  </Link>
+                </li>
+              )}
+              {siteConfig.sections.showMemberships && (
+                <li>
+                  <Link href="/#plans" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                    Memberships
+                  </Link>
+                </li>
+              )}
+              {siteConfig.sections.showReviews && (
+                <li>
+                  <Link href="/#reviews" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                    Reviews
+                  </Link>
+                </li>
+              )}
               <li>
-                <Link href="/#about" className="hover:text-[#E4FF1A] transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/#programs" className="hover:text-[#E4FF1A] transition-colors">
-                  Programs
-                </Link>
-              </li>
-              <li>
-                <Link href="/#coaches" className="hover:text-[#E4FF1A] transition-colors">
-                  Coaches
-                </Link>
-              </li>
-              <li>
-                <Link href="/#plans" className="hover:text-[#E4FF1A] transition-colors">
-                  Memberships
-                </Link>
-              </li>
-              <li>
-                <Link href="/#reviews" className="hover:text-[#E4FF1A] transition-colors">
-                  Reviews
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#E4FF1A] transition-colors">
+                <Link href="/contact" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                   Contact
                 </Link>
               </li>
-              <li className="pt-1">
-                <Link href="/memberships" className="text-[#E4FF1A] hover:underline font-semibold flex items-center gap-1">
-                  <span>Compare plans</span>
-                  <ArrowUpRight className="h-3 w-3" />
-                </Link>
-              </li>
+              {siteConfig.sections.showMemberships && (
+                <li className="pt-1">
+                  <Link href="/memberships" className="text-[var(--color-accent,#E4FF1A)] hover:underline font-semibold flex items-center gap-1">
+                    <span>Compare plans</span>
+                    <ArrowUpRight className="h-3 w-3" />
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 

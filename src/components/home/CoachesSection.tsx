@@ -8,6 +8,8 @@ import { useModal } from "@/context/ModalContext";
 import { Photo } from "@/components/ui/Photo";
 import { AutoCarousel } from "@/components/ui/AutoCarousel";
 
+import { SampleBadge } from "@/components/ui/SampleBadge";
+
 function CoachCard({
   coach,
   onClick,
@@ -68,10 +70,11 @@ export function CoachesSection() {
         {/* Section Header */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-2 mb-2 sm:mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
               COACHING STAFF
             </span>
+            <SampleBadge />
           </div>
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase text-white leading-[0.95]">
             MEET YOUR COACHES.

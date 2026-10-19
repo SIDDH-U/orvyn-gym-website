@@ -117,7 +117,7 @@ export function FreePassModal() {
               <>
                 {/* Header */}
                 <div className="mb-6">
-                  <span className="inline-block rounded-full bg-[#E4FF1A]/10 px-3 py-1 text-xs font-semibold tracking-wider text-[#E4FF1A] uppercase mb-2">
+                  <span className="inline-block rounded-full bg-[var(--color-accent,#E4FF1A)]/10 px-3 py-1 text-xs font-semibold tracking-wider text-[var(--color-accent,#E4FF1A)] uppercase mb-2">
                     {selectedPlan || "VIP DAY PASS"}
                   </span>
                   <h2
@@ -172,7 +172,7 @@ export function FreePassModal() {
                       className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                         phoneError
                           ? "border-red-500 focus:ring-red-500"
-                          : "border-white/10 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                          : "border-white/10 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                       }`}
                     />
                     {phoneError && (
@@ -183,7 +183,7 @@ export function FreePassModal() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#E4FF1A] px-6 py-3.5 text-sm font-bold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d6f20d] active:scale-[0.98] glow-yellow-sm mt-2"
+                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-6 py-3.5 text-sm font-bold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow-sm mt-2"
                   >
                     <span>CLAIM FREE PASS</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

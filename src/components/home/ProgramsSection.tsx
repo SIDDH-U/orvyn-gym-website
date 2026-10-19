@@ -18,7 +18,7 @@ function ProgramCard({
   return (
     <div
       onClick={onClick}
-      className="group relative w-full rounded-[20px] overflow-hidden border border-white/10 bg-[#15171B] aspect-[4/5] cursor-pointer shadow-xl transition-all duration-300 hover:border-[#E4FF1A]/60 hover:-translate-y-1.5"
+      className="group relative w-full rounded-[20px] overflow-hidden border border-white/10 bg-[#15171B] aspect-[4/5] cursor-pointer shadow-xl transition-all duration-300 hover:border-[var(--color-accent,#E4FF1A)]/60 hover:-translate-y-1.5"
     >
       {/* Photo with global treatment and strong bottom gradient */}
       <Photo
@@ -42,7 +42,7 @@ function ProgramCard({
 
       {/* Bottom Content Area */}
       <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-6 flex flex-col justify-end">
-        <h3 className="font-display text-2xl font-extrabold uppercase text-white tracking-tight leading-none group-hover:text-[#E4FF1A] transition-colors">
+        <h3 className="font-display text-2xl font-extrabold uppercase text-white tracking-tight leading-none group-hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
           {program.title}
         </h3>
         {/* ONE-line description */}
@@ -50,12 +50,12 @@ function ProgramCard({
           {program.description}
         </p>
 
-        {/* Sliding Yellow Label & Arrow on Hover */}
+        {/* Sliding Label & Arrow on Hover */}
         <div className="mt-3.5 flex items-center justify-between border-t border-white/10 pt-3">
-          <span className="text-xs font-bold tracking-wider uppercase text-[#E4FF1A]">
+          <span className="text-xs font-bold tracking-wider uppercase text-[var(--color-accent,#E4FF1A)]">
             EXPLORE
           </span>
-          <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#E4FF1A] text-[#0B0C0E] transition-transform duration-300 group-hover:translate-x-1">
+          <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] transition-transform duration-300 group-hover:translate-x-1">
             <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.5]" />
           </div>
         </div>
@@ -76,8 +76,8 @@ export function ProgramsSection() {
         {/* Section Header */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-2 mb-2 sm:mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+            <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
               PROGRAMS & DISCIPLINES
             </span>
           </div>
@@ -89,7 +89,7 @@ export function ProgramsSection() {
           </p>
         </div>
 
-        {/* Desktop Static 4-Column Grid */}
+        {/* Desktop Static Grid */}
         <div className="hidden lg:grid lg:grid-cols-4 gap-6">
           {siteConfig.programs.map((program, idx) => (
             <motion.div

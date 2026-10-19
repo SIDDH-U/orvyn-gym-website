@@ -32,16 +32,16 @@ export function AboutSection() {
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="relative">
               {/* Outer Glow */}
-              <div className="absolute inset-0 rounded-full bg-[#E4FF1A]/10 blur-2xl pointer-events-none" />
+              <div className="absolute inset-0 rounded-full bg-[var(--color-accent,#E4FF1A)]/10 blur-2xl pointer-events-none" />
 
-              {/* Yellow ring frame */}
-              <div className="relative w-[min(68vw,280px)] h-[min(68vw,280px)] sm:w-[360px] sm:h-[360px] lg:w-[400px] lg:h-[400px] rounded-full p-2.5 sm:p-3.5 bg-[#E4FF1A] shadow-2xl">
+              {/* Accent ring frame */}
+              <div className="relative w-[min(68vw,280px)] h-[min(68vw,280px)] sm:w-[360px] sm:h-[360px] lg:w-[400px] lg:h-[400px] rounded-full p-2.5 sm:p-3.5 bg-[var(--color-accent,#E4FF1A)] shadow-2xl">
                 <div className="relative h-full w-full rounded-full overflow-hidden bg-[#15171B]">
                   <motion.div style={{ scale: imgScale }} className="relative h-full w-full">
                     {/* Clean photo without any baked-in text */}
                     <Photo
                       src={siteConfig.images.aboutCommunity}
-                      alt="ORVYN Gym Community Training"
+                      alt={`${siteConfig.name} Gym Community Training`}
                       fill
                       priority={false}
                       sizes="(max-width: 640px) 280px, 400px"
@@ -51,7 +51,7 @@ export function AboutSection() {
               </div>
 
               {/* Single Circular Badge with Rotating SVG Text-on-Path & Arrow */}
-              <div className="absolute -bottom-2 -right-2 sm:bottom-1 sm:right-1 z-20 flex h-20 w-20 sm:h-28 sm:w-28 items-center justify-center rounded-full bg-[#0B0C0E] border-2 border-[#E4FF1A] shadow-2xl">
+              <div className="absolute -bottom-2 -right-2 sm:bottom-1 sm:right-1 z-20 flex h-20 w-20 sm:h-28 sm:w-28 items-center justify-center rounded-full bg-[#0B0C0E] border-2 border-[var(--color-accent,#E4FF1A)] shadow-2xl">
                 <motion.svg
                   viewBox="0 0 100 100"
                   animate={shouldReduceMotion ? {} : { rotate: 360 }}
@@ -71,7 +71,7 @@ export function AboutSection() {
                 </motion.svg>
 
                 {/* Center Arrow */}
-                <div className="relative z-10 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#E4FF1A] text-[#0B0C0E] shadow-md">
+                <div className="relative z-10 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-md">
                   <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 stroke-[2.5]" />
                 </div>
               </div>
@@ -88,8 +88,8 @@ export function AboutSection() {
           >
             {/* Eyebrow */}
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
                 OUR COMMUNITY
               </span>
             </div>
@@ -111,7 +111,7 @@ export function AboutSection() {
             <div className="mt-6 sm:mt-8">
               <button
                 onClick={() => openModal("Community Member")}
-                className="group flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#E4FF1A] px-7 py-3 text-xs sm:text-sm font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow-sm"
+                className="group flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-7 py-3 text-xs sm:text-sm font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow-sm"
               >
                 <span>JOIN OUR COMMUNITY</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
