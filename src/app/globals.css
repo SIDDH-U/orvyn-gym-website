@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0B0C0E;
+  --color-surface: #15171B;
+  --color-surface-card: #191B20;
+  --color-accent: #E4FF1A;
+  --color-accent-hover: #D4EF0E;
+  --color-text-primary: #FFFFFF;
+  --color-text-muted: #A1A5AD;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  --font-heading: var(--font-heading), "Barlow Condensed", sans-serif;
+  --font-body: var(--font-body), "Inter", sans-serif;
+}
+
+:root {
+  --bg-primary: #0B0C0E;
+  --bg-surface: #15171B;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --accent-yellow: #E4FF1A;
+  --text-muted: #A1A5AD;
+}
+
+.font-display {
+  font-family: var(--font-heading), "Barlow Condensed", "Oswald", sans-serif;
+  letter-spacing: -0.005em;
+}
+
+body {
+  background-color: #0B0C0E;
+  color: #FFFFFF;
+  font-family: var(--font-body), "Inter", sans-serif;
+}
+
+/* Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Hide scrollbars for snap carousels while allowing touch scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Dark gym photo color grading filter */
+.gym-photo-grade {
+  filter: contrast(1.1) brightness(0.92) saturate(0.85);
+}
+
+/* Yellow Glow */
+.glow-yellow {
+  box-shadow: 0 0 25px rgba(228, 255, 26, 0.35);
+}
+
+.glow-yellow-sm {
+  box-shadow: 0 0 12px rgba(228, 255, 26, 0.25);
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+/* ================= HERO LIGHT SWEEP (CSS ONLY) ================= */
+@keyframes heroLightSweep {
+  0% {
+    transform: skewX(-20deg) translateX(-180%);
+    opacity: 0;
+    animation-timing-function: ease-in-out;
+  }
+  1.5% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  25.7% {
+    transform: skewX(-20deg) translateX(380%);
+    opacity: 0;
+    animation-timing-function: step-end;
+  }
+  100% {
+    transform: skewX(-20deg) translateX(380%);
+    opacity: 0;
+  }
+}
+
+.hero-sweep-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-sweep-element {
+  position: absolute;
+  top: -25%;
+  left: 0;
+  width: 35%;
+  height: 150%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(228, 255, 26, 0.10) 25%,
+    rgba(255, 255, 230, 0.14) 50%,
+    rgba(228, 255, 26, 0.10) 75%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  will-change: transform;
+  animation: heroLightSweep 7s infinite 2s;
+}
+
+/* Desktop: Invisible over left 35% (headline area), fully visible across right */
+@media (min-width: 768px) {
+  .hero-sweep-container {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 35%, black 50%, black 100%);
+    mask-image: linear-gradient(to right, transparent 0%, transparent 35%, black 50%, black 100%);
+  }
+}
+
+/* Mobile: Visible over top ~55% of image, fades out before headline zone */
+@media (max-width: 767px) {
+  .hero-sweep-container {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 58%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 58%, transparent 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sweep-container,
+  .hero-sweep-element {
+    display: none !important;
+    animation: none !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
