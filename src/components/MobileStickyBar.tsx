@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Phone, ArrowRight } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 
 export function MobileStickyBar() {
   const { openModal } = useModal();
+  const { name, phoneRaw } = useDemo();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export function MobileStickyBar() {
             {/* Slimmer (48px) Join Now Button with soft glow */}
             <button
               onClick={() => openModal()}
-              className="group flex-1 flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#E4FF1A] px-5 text-xs font-extrabold tracking-wider uppercase text-[#0B0C0E] shadow-[0_0_16px_rgba(228,255,26,0.22)] active:scale-[0.98] transition-all hover:bg-[#d4ef0e]"
+              className="group flex-1 flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-5 text-xs font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] shadow-[0_0_16px_var(--color-glow-sm,rgba(228,255,26,0.22))] active:scale-[0.98] transition-all hover:bg-[var(--color-accent-hover,#d4ef0e)]"
             >
               <span>JOIN NOW</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -77,8 +79,8 @@ export function MobileStickyBar() {
 
             {/* Slimmer (48px) Round Call Button */}
             <a
-              href={`tel:${siteConfig.phoneRaw}`}
-              aria-label={`Call ${siteConfig.name}`}
+              href={`tel:${phoneRaw}`}
+              aria-label={`Call ${name}`}
               className="flex h-12 w-12 min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#15171B] text-white shadow-md active:scale-95 transition-transform hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)]"
             >
               <Phone className="h-4 w-4" />

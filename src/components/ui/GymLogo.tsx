@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 
 interface GymLogoProps {
   className?: string;
@@ -15,6 +16,8 @@ export function GymLogo({
   showSubtitle = false,
   size = "md",
 }: GymLogoProps) {
+  const { name } = useDemo();
+
   // If custom logo image is provided in gym.config.ts, render the image
   if (siteConfig.logoImage) {
     const height = size === "sm" ? 28 : size === "lg" ? 44 : 36;
@@ -22,7 +25,7 @@ export function GymLogo({
       <div className={`relative flex items-center ${className}`}>
         <Image
           src={siteConfig.logoImage}
-          alt={siteConfig.name}
+          alt={name}
           height={height}
           width={height * 3}
           className="h-auto w-auto max-h-11 object-contain"
@@ -46,9 +49,11 @@ export function GymLogo({
     <div className={`flex flex-col ${className}`}>
       <div className="flex items-center gap-1.5 sm:gap-2">
         <span
+          suppressHydrationWarning
+          data-demo="name"
           className={`font-display font-extrabold tracking-tight text-white uppercase leading-none ${titleSizeClass}`}
         >
-          {siteConfig.name}
+          {name}
         </span>
         <span
           className={`rounded-full bg-[var(--color-accent,#E4FF1A)] transition-transform group-hover:scale-125 ${dotSizeClass}`}

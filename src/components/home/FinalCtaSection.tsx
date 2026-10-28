@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle, MessageSquare } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 import { Photo } from "@/components/ui/Photo";
 
 export function FinalCtaSection() {
+  const { name: demoName, whatsappNumber } = useDemo();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [nameError, setNameError] = useState("");
@@ -38,8 +40,8 @@ export function FinalCtaSection() {
 
     setIsSubmitted(true);
 
-    const message = `Hi ${siteConfig.name}! I would like to claim my Free Pass via the website.\n\nName: ${name.trim()}\nPhone: ${phone.trim()}`;
-    const whatsappUrl = `https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(message)}`;
+    const message = `Hi ${demoName}! I would like to claim my Free Pass via the website.\n\nName: ${name.trim()}\nPhone: ${phone.trim()}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     setTimeout(() => {
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
@@ -58,7 +60,7 @@ export function FinalCtaSection() {
       <div className="absolute inset-0 z-0">
         <Photo
           src={siteConfig.images.ctaGroup}
-          alt={`${siteConfig.name} Athletes Community`}
+          alt={`${demoName} Athletes Community`}
           fill
           sizes="100vw"
           className="opacity-75 object-cover object-center"
@@ -168,7 +170,7 @@ export function FinalCtaSection() {
               </p>
               <div className="mt-4">
                 <a
-                  href={`https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(`Hi ${siteConfig.name}! I claimed my Free Pass.\n\nName: ${name}\nPhone: ${phone}`)}`}
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi ${demoName}! I claimed my Free Pass.\n\nName: ${name}\nPhone: ${phone}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#25D366] px-5 py-2 text-xs font-bold text-white uppercase tracking-wider"

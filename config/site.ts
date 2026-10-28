@@ -157,7 +157,7 @@ export const siteConfig = {
     area: gymConfig.area,
     pincode: gymConfig.pincode,
     state: gymConfig.state,
-    full: `${gymConfig.address}, ${gymConfig.city}, ${gymConfig.state} ${gymConfig.pincode}`,
+    full: gymConfig.city,
     mapsUrl: gymConfig.mapsLink,
     embedMapUrl: gymConfig.embedMapUrl,
   },

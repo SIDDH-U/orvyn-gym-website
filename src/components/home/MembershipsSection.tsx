@@ -6,8 +6,10 @@ import { Check, ArrowRight, Star, Crown, Dumbbell, ChevronRight } from "lucide-r
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig, Plan } from "@/config/site";
 import { useModal } from "@/context/ModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export function MembershipsSection() {
+  const demo = useDemo();
   const { openModal } = useModal();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const [selectedMobileIndex, setSelectedMobileIndex] = useState(1); // Start on PRO (index 1)
@@ -97,8 +99,8 @@ export function MembershipsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
                 MEMBERSHIP PLANS
               </span>
             </div>
@@ -112,8 +114,8 @@ export function MembershipsSection() {
 
           {/* Only ONE "Compare all features" link */}
           <Link
-            href="/memberships"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-[#E4FF1A] hover:underline"
+            href={demo.getInternalHref("/memberships")}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-[var(--color-accent,#E4FF1A)] hover:underline"
           >
             <span>Compare all features</span>
             <ChevronRight className="h-4 w-4" />
@@ -130,7 +132,7 @@ export function MembershipsSection() {
               }}
               className={`rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                 billingCycle === "monthly"
-                  ? "bg-[#E4FF1A] text-[#0B0C0E] shadow-sm"
+                  ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-sm"
                   : "text-[#A1A5AD] hover:text-white"
               }`}
             >
@@ -143,12 +145,12 @@ export function MembershipsSection() {
               }}
               className={`flex items-center gap-1.5 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                 billingCycle === "yearly"
-                  ? "bg-[#E4FF1A] text-[#0B0C0E] shadow-sm"
+                  ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-sm"
                   : "text-[#A1A5AD] hover:text-white"
               }`}
             >
               <span>YEARLY</span>
-              <span className="rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-[#E4FF1A] font-extrabold">
+              <span className="rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-[var(--color-accent,#E4FF1A)] font-extrabold">
                 SAVE 20%
               </span>
             </button>
@@ -174,13 +176,13 @@ export function MembershipsSection() {
                 key={plan.id}
                 className={`relative flex flex-col justify-between rounded-[20px] p-6 sm:p-8 transition-all duration-300 shadow-xl ${
                   isPro
-                    ? "border-2 border-[#E4FF1A] bg-[#15171B] md:-translate-y-3 md:shadow-[0_0_30px_rgba(228,255,26,0.15)] z-10"
+                    ? "border-2 border-[var(--color-accent,#E4FF1A)] bg-[#15171B] md:-translate-y-3 shadow-xl z-10"
                     : "border border-white/10 bg-[#15171B] hover:border-white/20"
                 }`}
               >
                 {/* Most Popular Badge on PRO */}
                 {isPro && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#E4FF1A] px-4 py-1 text-[11px] font-extrabold tracking-wider uppercase text-[#0B0C0E] shadow-md flex items-center gap-1">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-4 py-1 text-[11px] font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] shadow-md flex items-center gap-1">
                     <Crown className="h-3 w-3 stroke-[2.5]" />
                     <span>{plan.badge || "MOST POPULAR"}</span>
                   </div>
@@ -195,7 +197,7 @@ export function MembershipsSection() {
                     <div
                       className={`flex h-10 w-10 items-center justify-center rounded-full ${
                         isPro
-                          ? "bg-[#E4FF1A] text-[#0B0C0E]"
+                          ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)]"
                           : "border border-white/10 bg-white/5 text-gray-300"
                       }`}
                     >
@@ -220,7 +222,7 @@ export function MembershipsSection() {
                   <div className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
                     {plan.features.map((feature, fIdx) => (
                       <div key={fIdx} className="flex items-start gap-2.5">
-                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#E4FF1A]/10 text-[#E4FF1A] mt-0.5">
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)] mt-0.5">
                           <Check className="h-3 w-3 stroke-[3]" />
                         </div>
                         <span className="text-xs text-gray-200">
@@ -237,7 +239,7 @@ export function MembershipsSection() {
                     onClick={() => openModal(`${plan.name} Membership`)}
                     className={`group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full py-3.5 px-6 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all active:scale-[0.98] ${
                       isPro
-                        ? "bg-[#E4FF1A] text-[#0B0C0E] hover:bg-[#d4ef0e] glow-yellow shadow-lg"
+                        ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] hover:bg-[var(--color-accent-hover,#d4ef0e)] glow-yellow shadow-lg"
                         : "border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white"
                     }`}
                   >
@@ -264,18 +266,18 @@ export function MembershipsSection() {
                     setSelectedMobileIndex(idx);
                   }}
                   className={`relative flex-1 py-2.5 text-center text-xs font-extrabold uppercase tracking-wider transition-colors z-10 flex items-center justify-center gap-1 ${
-                    isSelected ? "text-[#0B0C0E]" : "text-[#A1A5AD] hover:text-white"
+                    isSelected ? "text-[var(--color-cta-text,#0B0C0E)]" : "text-[#A1A5AD] hover:text-white"
                   }`}
                 >
                   <span>{plan.name}</span>
                   {plan.popular && !isSelected && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
                   )}
                   {isSelected && (
                     <motion.div
                       layoutId="activePlanTab"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      className="absolute inset-0 rounded-full bg-[#E4FF1A] -z-10 shadow-md"
+                      className="absolute inset-0 rounded-full bg-[var(--color-cta,#E4FF1A)] -z-10 shadow-md"
                     />
                   )}
                 </button>
@@ -287,7 +289,7 @@ export function MembershipsSection() {
           <div
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className="relative min-h-[440px] rounded-[20px] border-2 border-[#E4FF1A] bg-[#15171B] p-6 shadow-2xl overflow-hidden flex flex-col justify-between"
+            className="relative min-h-[440px] rounded-[20px] border-2 border-[var(--color-accent,#E4FF1A)] bg-[#15171B] p-6 shadow-2xl overflow-hidden flex flex-col justify-between"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -306,12 +308,12 @@ export function MembershipsSection() {
                         {currentMobilePlan.name}
                       </h3>
                       {currentMobilePlan.popular && (
-                        <span className="rounded-full bg-[#E4FF1A] px-2.5 py-0.5 text-[10px] font-extrabold tracking-wider uppercase text-[#0B0C0E]">
+                        <span className="rounded-full bg-[var(--color-cta,#E4FF1A)] px-2.5 py-0.5 text-[10px] font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)]">
                           POPULAR
                         </span>
                       )}
                     </div>
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E4FF1A] text-[#0B0C0E]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)]">
                       {planIcons[selectedMobileIndex]}
                     </div>
                   </div>
@@ -339,7 +341,7 @@ export function MembershipsSection() {
                   <div className="mt-5 space-y-2.5 border-t border-white/10 pt-4">
                     {currentMobilePlan.features.map((feature, fIdx) => (
                       <div key={fIdx} className="flex items-start gap-2.5">
-                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#E4FF1A]/10 text-[#E4FF1A] mt-0.5">
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)] mt-0.5">
                           <Check className="h-3 w-3 stroke-[3]" />
                         </div>
                         <span className="text-xs text-gray-200">
@@ -357,7 +359,7 @@ export function MembershipsSection() {
                       markInteraction();
                       openModal(`${currentMobilePlan.name} Membership`);
                     }}
-                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#E4FF1A] py-3.5 px-6 text-xs font-bold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow shadow-lg"
+                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] py-3.5 px-6 text-xs font-bold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:bg-[var(--color-accent-hover,#d4ef0e)] active:scale-[0.98] glow-yellow shadow-lg"
                   >
                     <span>{currentMobilePlan.ctaText}</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

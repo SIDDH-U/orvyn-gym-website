@@ -18,11 +18,11 @@ export interface GymConfig {
   heroSubtext: string;
 
   // Contact & communications
-  phone: string; // Display format, e.g. "+1 (555) 389-2044"
-  phoneRaw: string; // Raw digits with country code for tel:, e.g. "+15553892044"
-  whatsappNumber: string; // Digits only, used for all wa.me links, e.g. "15553892044"
+  phone: string; // Display format, e.g. "Your Phone No."
+  phoneRaw: string; // Raw digits with country code for tel:, e.g. "918080076322"
+  whatsappNumber: string; // Digits only, used for all wa.me links, e.g. "918080076322"
   email: string;
-  domain: string; // Canonical URL, e.g. "https://orvynfitness.com"
+  domain: string; // Canonical URL, e.g. "https://yourgym.com"
 
   // Location & mapping
   address: string;
@@ -96,10 +96,10 @@ export interface GymConfig {
  * =========================================================================
  */
 export const gymConfig: GymConfig = {
-  name: "ORVYN",
-  shortName: "ORVYN",
+  name: "Your Gym",
+  shortName: "Your Gym",
   tagline: "TRAIN HARDER. LIVE STRONGER.",
-  slug: "orvyn-gym",
+  slug: "your-gym",
   logoSubtitle: "FITNESS CLUB",
   // logoImage: "/images/gym/logo.png", // Uncomment to use custom logo image
 
@@ -110,18 +110,18 @@ export const gymConfig: GymConfig = {
   },
   heroSubtext: "A premium gym for people who want more from themselves.",
 
-  phone: "+1 (555) 389-2044",
-  phoneRaw: "+15553892044",
-  whatsappNumber: "15553892044",
-  email: "hello@orvynfitness.com",
-  domain: "https://orvynfitness.com",
+  phone: "Your Phone No.",
+  phoneRaw: "918080076322",
+  whatsappNumber: "918080076322",
+  email: "hello@yourgym.com",
+  domain: "https://yourgym.com",
 
-  address: "742 Evergreen Blvd, Suite 100",
-  city: "Los Angeles",
-  area: "Downtown",
-  pincode: "90028",
-  state: "CA",
-  mapsLink: "https://maps.google.com/?q=ORVYN+Fitness+Los+Angeles",
+  address: "Your City",
+  city: "Your City",
+  area: "",
+  pincode: "",
+  state: "",
+  mapsLink: "https://maps.google.com/?q=Your+Gym+Your+City",
   embedMapUrl: "",
 
   hours: {

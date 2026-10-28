@@ -78,9 +78,9 @@ export function ReviewsSection() {
           </h2>
           {/* Rating line from config */}
           <div className="mt-2.5 flex items-center gap-3">
-            <div className="flex items-center gap-1 text-[#E4FF1A]">
+            <div className="flex items-center gap-1 text-[var(--color-accent,#E4FF1A)]">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-[#E4FF1A]" />
+                <Star key={i} className="h-4 w-4 fill-[var(--color-accent,#E4FF1A)]" />
               ))}
             </div>
             <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#A1A5AD]">
@@ -115,7 +115,7 @@ export function ReviewsSection() {
                     sizes="400px"
                   />
                   {/* Result Pill on Photo */}
-                  <div className="absolute bottom-4 left-4 z-10 rounded-full bg-[#E4FF1A] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-[#0B0C0E] shadow-lg">
+                  <div className="absolute bottom-4 left-4 z-10 rounded-full bg-[var(--color-cta,#E4FF1A)] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-[var(--color-cta-text,#0B0C0E)] shadow-lg">
                     {currentReview.result}
                   </div>
                 </motion.div>
@@ -128,12 +128,12 @@ export function ReviewsSection() {
             <div>
               {/* Stars & Quote Icon */}
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 text-[#E4FF1A]">
+                <div className="flex items-center gap-1 text-[var(--color-accent,#E4FF1A)]">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-[#E4FF1A]" />
+                    <Star key={i} className="h-5 w-5 fill-[var(--color-accent,#E4FF1A)]" />
                   ))}
                 </div>
-                <Quote className="h-10 w-10 text-[#E4FF1A]/20" />
+                <Quote className="h-10 w-10 text-[var(--color-accent,#E4FF1A)]/20" />
               </div>
 
               {/* Crossfading Quote */}
@@ -177,7 +177,7 @@ export function ReviewsSection() {
                       }}
                       className={`relative h-11 w-11 rounded-full overflow-hidden border-2 transition-all ${
                         isActive
-                          ? "border-[#E4FF1A] scale-110 shadow-[0_0_12px_rgba(228,255,26,0.5)]"
+                          ? "border-[var(--color-accent,#E4FF1A)] scale-110 shadow-[0_0_12px_var(--color-glow,rgba(228,255,26,0.5))]"
                           : "border-white/20 opacity-60 hover:opacity-100"
                       }`}
                     >
@@ -195,7 +195,7 @@ export function ReviewsSection() {
               {/* Thin yellow progress bar indicating auto-crossfade */}
               <div className="mt-4 h-1 w-full bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#E4FF1A] transition-all duration-75"
+                  className="h-full bg-[var(--color-accent,#E4FF1A)] transition-all duration-75"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -217,16 +217,16 @@ export function ReviewsSection() {
                 className="relative flex flex-col justify-between rounded-[20px] border border-white/10 bg-[#15171B] p-6 shadow-xl h-full min-h-[300px]"
               >
                 {/* Subtle top accent line */}
-                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#E4FF1A] via-[#E4FF1A]/60 to-transparent rounded-t-[20px]" />
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[var(--color-accent,#E4FF1A)] via-[var(--color-accent,#E4FF1A)]/60 to-transparent rounded-t-[20px]" />
 
                 {/* Big faint yellow quote mark */}
-                <Quote className="absolute top-4 right-4 h-12 w-12 text-[#E4FF1A]/10 pointer-events-none" />
+                <Quote className="absolute top-4 right-4 h-12 w-12 text-[var(--color-accent,#E4FF1A)]/10 pointer-events-none" />
 
                 <div>
                   {/* Top: Member photo with yellow ring + Stars */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="relative h-12 w-12 rounded-full p-0.5 bg-[#E4FF1A] shrink-0">
+                      <div className="relative h-12 w-12 rounded-full p-0.5 bg-[var(--color-accent,#E4FF1A)] shrink-0">
                         <div className="relative h-full w-full rounded-full overflow-hidden bg-gray-900">
                           <Photo
                             src={rev.photo}
@@ -244,9 +244,9 @@ export function ReviewsSection() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-0.5 text-[#E4FF1A]">
+                    <div className="flex items-center gap-0.5 text-[var(--color-accent,#E4FF1A)]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 fill-[#E4FF1A]" />
+                        <Star key={i} className="h-3.5 w-3.5 fill-[var(--color-accent,#E4FF1A)]" />
                       ))}
                     </div>
                   </div>
@@ -262,7 +262,7 @@ export function ReviewsSection() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#A1A5AD]">
                     VERIFIED RESULT
                   </span>
-                  <div className="rounded-full bg-[#E4FF1A] px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#0B0C0E]">
+                  <div className="rounded-full bg-[var(--color-cta,#E4FF1A)] px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[var(--color-cta-text,#0B0C0E)]">
                     {rev.result}
                   </div>
                 </div>

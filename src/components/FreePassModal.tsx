@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle, ArrowRight, Phone, User, MessageSquare } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 
 export function FreePassModal() {
   const { isOpen, closeModal, selectedPlan } = useModal();
+  const { name: demoName, whatsappNumber } = useDemo();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [nameError, setNameError] = useState("");
@@ -69,8 +71,8 @@ export function FreePassModal() {
 
     setIsSubmitted(true);
 
-    const message = `Hi ${siteConfig.name}! I would like to claim my Free Pass (${selectedPlan}).\n\nName: ${name.trim()}\nPhone: ${phone.trim()}`;
-    const whatsappUrl = `https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(message)}`;
+    const message = `Hi ${demoName}! I would like to claim my Free Pass (${selectedPlan}).\n\nName: ${name.trim()}\nPhone: ${phone.trim()}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     // Open WhatsApp after brief moment so user sees the confirmation state
     setTimeout(() => {
@@ -107,7 +109,7 @@ export function FreePassModal() {
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#E4FF1A]"
+              className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)]"
               aria-label="Close modal"
             >
               <X className="h-5 w-5" />
@@ -149,7 +151,7 @@ export function FreePassModal() {
                       className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                         nameError
                           ? "border-red-500 focus:ring-red-500"
-                          : "border-white/10 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                          : "border-white/10 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                       }`}
                     />
                     {nameError && (
@@ -168,7 +170,7 @@ export function FreePassModal() {
                         setPhone(e.target.value);
                         if (phoneError) setPhoneError("");
                       }}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="Your Phone No."
                       className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                         phoneError
                           ? "border-red-500 focus:ring-red-500"
@@ -197,7 +199,7 @@ export function FreePassModal() {
             ) : (
               /* Success State */
               <div className="py-6 text-center">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#E4FF1A]/20 text-[#E4FF1A]">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/20 text-[var(--color-accent,#E4FF1A)]">
                   <CheckCircle className="h-8 w-8" />
                 </div>
                 <h3 className="font-display text-2xl font-bold uppercase text-white">
@@ -209,7 +211,7 @@ export function FreePassModal() {
 
                 <div className="mt-6 flex flex-col gap-3">
                   <a
-                    href={`https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(`Hi ${siteConfig.name}! I would like to claim my Free Pass (${selectedPlan}).\n\nName: ${name}\nPhone: ${phone}`)}`}
+                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi ${demoName}! I would like to claim my Free Pass (${selectedPlan}).\n\nName: ${name}\nPhone: ${phone}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"

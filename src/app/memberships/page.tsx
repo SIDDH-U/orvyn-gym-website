@@ -24,20 +24,23 @@ export default function MembershipsPage() {
   ];
 
   return (
-    <div className="flex flex-col w-full min-h-screen pt-28 sm:pt-36 bg-[#0B0C0E]">
+    <div
+      className="flex flex-col w-full min-h-screen bg-[#0B0C0E]"
+      style={{ paddingTop: "calc(7rem + var(--demo-h, 0px))" }}
+    >
       
       {/* 1. SHORT HERO */}
       <section className="relative w-full pb-10 sm:pb-14">
         <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
                 MEMBERSHIP TIERS
               </span>
             </div>
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.95]">
-              CHOOSE YOUR <span className="text-[#E4FF1A]">COMMITMENT.</span>
+              CHOOSE YOUR <span className="text-[var(--color-accent,#E4FF1A)]">COMMITMENT.</span>
             </h1>
             <p className="mt-3 text-sm sm:text-base lg:text-lg text-[#A1A5AD] leading-relaxed">
               Every membership tier includes unmetered facility access, towel service, and app integration. Upgrade, pause or cancel anytime.
@@ -56,7 +59,7 @@ export default function MembershipsPage() {
                 onClick={() => setBillingCycle("monthly")}
                 className={`rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                   billingCycle === "monthly"
-                    ? "bg-[#E4FF1A] text-[#0B0C0E] shadow-sm"
+                    ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-sm"
                     : "text-[#A1A5AD] hover:text-white"
                 }`}
               >
@@ -66,12 +69,12 @@ export default function MembershipsPage() {
                 onClick={() => setBillingCycle("yearly")}
                 className={`flex items-center gap-1.5 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                   billingCycle === "yearly"
-                    ? "bg-[#E4FF1A] text-[#0B0C0E] shadow-sm"
+                    ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] shadow-sm"
                     : "text-[#A1A5AD] hover:text-white"
                 }`}
               >
                 <span>YEARLY</span>
-                <span className="rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-[#E4FF1A] font-extrabold">
+                <span className="rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-[var(--color-accent,#E4FF1A)] font-extrabold">
                   SAVE 20%
                 </span>
               </button>
@@ -96,12 +99,12 @@ export default function MembershipsPage() {
                   key={plan.id}
                   className={`relative flex flex-col justify-between rounded-[20px] p-6 sm:p-8 transition-all duration-300 shadow-xl ${
                     isPro
-                      ? "border-2 border-[#E4FF1A] bg-[#15171B] md:-translate-y-3 md:shadow-[0_0_30px_rgba(228,255,26,0.15)] z-10"
+                      ? "border-2 border-[var(--color-accent,#E4FF1A)] bg-[#15171B] md:-translate-y-3 shadow-xl z-10"
                       : "border border-white/10 bg-[#15171B] hover:border-white/20"
                   }`}
                 >
                   {isPro && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#E4FF1A] px-4 py-1 text-[11px] font-extrabold tracking-wider uppercase text-[#0B0C0E] shadow-md flex items-center gap-1">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-4 py-1 text-[11px] font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] shadow-md flex items-center gap-1">
                       <Crown className="h-3 w-3 stroke-[2.5]" />
                       <span>{plan.badge || "MOST POPULAR"}</span>
                     </div>
@@ -115,7 +118,7 @@ export default function MembershipsPage() {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full ${
                           isPro
-                            ? "bg-[#E4FF1A] text-[#0B0C0E]"
+                            ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)]"
                             : "border border-white/10 bg-white/5 text-gray-300"
                         }`}
                       >
@@ -138,7 +141,7 @@ export default function MembershipsPage() {
                     <div className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
                       {plan.features.map((feature, fIdx) => (
                         <div key={fIdx} className="flex items-start gap-2.5">
-                          <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#E4FF1A]/10 text-[#E4FF1A] mt-0.5">
+                          <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)] mt-0.5">
                             <Check className="h-3 w-3 stroke-[3]" />
                           </div>
                           <span className="text-xs text-gray-200">
@@ -154,7 +157,7 @@ export default function MembershipsPage() {
                       onClick={() => openModal(`${plan.name} Membership`)}
                       className={`group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full py-3.5 px-6 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all active:scale-[0.98] ${
                         isPro
-                          ? "bg-[#E4FF1A] text-[#0B0C0E] hover:bg-[#d4ef0e] glow-yellow shadow-lg"
+                          ? "bg-[var(--color-cta,#E4FF1A)] text-[var(--color-cta-text,#0B0C0E)] hover:bg-[var(--color-accent-hover,#d4ef0e)] glow-yellow shadow-lg"
                           : "border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white"
                       }`}
                     >
@@ -174,8 +177,8 @@ export default function MembershipsPage() {
         <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
           <div className="mb-8 sm:mb-10">
             <div className="flex items-center gap-2 mb-2">
-              <ShieldCheck className="h-4 w-4 text-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+              <ShieldCheck className="h-4 w-4 text-[var(--color-accent,#E4FF1A)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
                 FEATURE MATRIX
               </span>
             </div>
@@ -195,7 +198,7 @@ export default function MembershipsPage() {
                   <th className="py-4 px-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white w-1/5">
                     Basic
                   </th>
-                  <th className="py-4 px-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#E4FF1A] w-1/5 bg-[#E4FF1A]/5">
+                  <th className="py-4 px-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[var(--color-accent,#E4FF1A)] w-1/5 bg-[var(--color-accent,#E4FF1A)]/5">
                     Pro (Popular)
                   </th>
                   <th className="py-4 px-4 text-center text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white w-1/5">
@@ -214,7 +217,7 @@ export default function MembershipsPage() {
                     <td className="py-3.5 px-4 text-center">
                       {typeof row.basic === "boolean" ? (
                         row.basic ? (
-                          <Check className="h-4 w-4 text-[#E4FF1A] mx-auto stroke-[2.5]" />
+                          <Check className="h-4 w-4 text-[var(--color-accent,#E4FF1A)] mx-auto stroke-[2.5]" />
                         ) : (
                           <XIcon className="h-4 w-4 text-gray-600 mx-auto" />
                         )
@@ -226,15 +229,15 @@ export default function MembershipsPage() {
                     </td>
 
                     {/* Pro */}
-                    <td className="py-3.5 px-4 text-center bg-[#E4FF1A]/5">
+                    <td className="py-3.5 px-4 text-center bg-[var(--color-accent,#E4FF1A)]/5">
                       {typeof row.pro === "boolean" ? (
                         row.pro ? (
-                          <Check className="h-4 w-4 text-[#E4FF1A] mx-auto stroke-[2.5]" />
+                          <Check className="h-4 w-4 text-[var(--color-accent,#E4FF1A)] mx-auto stroke-[2.5]" />
                         ) : (
                           <XIcon className="h-4 w-4 text-gray-600 mx-auto" />
                         )
                       ) : (
-                        <span className="text-xs font-bold text-[#E4FF1A]">
+                        <span className="text-xs font-bold text-[var(--color-accent,#E4FF1A)]">
                           {row.pro}
                         </span>
                       )}
@@ -244,7 +247,7 @@ export default function MembershipsPage() {
                     <td className="py-3.5 px-4 text-center">
                       {typeof row.elite === "boolean" ? (
                         row.elite ? (
-                          <Check className="h-4 w-4 text-[#E4FF1A] mx-auto stroke-[2.5]" />
+                          <Check className="h-4 w-4 text-[var(--color-accent,#E4FF1A)] mx-auto stroke-[2.5]" />
                         ) : (
                           <XIcon className="h-4 w-4 text-gray-600 mx-auto" />
                         )

@@ -22,6 +22,7 @@
    ========================================================================= */
 
 :root, [data-theme="volt"] {
+  --demo-h: 0px;
   --color-background: #0B0C0E;
   --color-surface: #15171B;
   --color-surface-card: #191B20;

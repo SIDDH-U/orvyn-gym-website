@@ -6,10 +6,12 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { ArrowRight, ChevronDown, Users, Clock, Dumbbell } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useModal } from "@/context/ModalContext";
+import { useDemo } from "@/context/DemoContext";
 import { ChalkDustCanvas } from "./ChalkDustCanvas";
 
 export function HeroSection() {
   const { openModal } = useModal();
+  const { name } = useDemo();
   const containerRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [canPlayVideo, setCanPlayVideo] = useState(false);
@@ -33,7 +35,11 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[100svh] min-h-[640px] md:min-h-[700px] w-full overflow-hidden bg-[#0B0C0E] flex flex-col justify-between items-center"
+      style={{
+        marginTop: "var(--demo-h, 0px)",
+        height: "calc(100svh - var(--demo-h, 0px))",
+      }}
+      className="relative min-h-[640px] md:min-h-[700px] w-full overflow-hidden bg-[#0B0C0E] flex flex-col justify-between items-center transition-all duration-300"
     >
       {/* ================= LAYER 1: HERO IMAGE (PRESERVED EXACTLY) ================= */}
       <motion.div
@@ -65,7 +71,7 @@ export function HeroSection() {
             <div className="hidden md:block w-full h-full relative">
               <Image
                 src={siteConfig.images.heroDesktop}
-                alt={`${siteConfig.name} Elite Athlete Training`}
+                alt={`${name} Elite Athlete Training`}
                 fill
                 priority
                 sizes="100vw"
@@ -81,7 +87,7 @@ export function HeroSection() {
             <div className="block md:hidden w-full h-full relative">
               <Image
                 src={siteConfig.images.heroMobile}
-                alt={`${siteConfig.name} Athlete Training`}
+                alt={`${name} Athlete Training`}
                 fill
                 priority
                 sizes="100vw"

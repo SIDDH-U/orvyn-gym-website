@@ -5,10 +5,12 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useModal } from "@/context/ModalContext";
+import { useDemo } from "@/context/DemoContext";
 import { Photo } from "@/components/ui/Photo";
 
 export function AboutSection() {
   const { openModal } = useModal();
+  const { name } = useDemo();
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -41,7 +43,7 @@ export function AboutSection() {
                     {/* Clean photo without any baked-in text */}
                     <Photo
                       src={siteConfig.images.aboutCommunity}
-                      alt={`${siteConfig.name} Gym Community Training`}
+                      alt={`${name} Gym Community Training`}
                       fill
                       priority={false}
                       sizes="(max-width: 640px) 280px, 400px"
@@ -101,7 +103,11 @@ export function AboutSection() {
 
             {/* ONE short sentence on mobile; secondary line on desktop */}
             <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-[#A1A5AD] leading-relaxed">
-              At {siteConfig.name}, you&apos;ll find support, discipline and a community that pushes you to be your best.
+              At{" "}
+              <span suppressHydrationWarning data-demo="name">
+                {name}
+              </span>
+              , you&apos;ll find support, discipline and a community that pushes you to be your best.
             </p>
             <p className="hidden md:block mt-2 text-base text-[#A1A5AD] leading-relaxed">
               A place to train, grow and belong with like-minded athletes.

@@ -13,8 +13,20 @@ import {
   Target,
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 
 export default function ContactPage() {
+  const {
+    name: demoName,
+    city: demoCity,
+    phone: demoPhone,
+    phoneRaw: demoPhoneRaw,
+    whatsappNumber,
+    insta: demoInsta,
+    instaUrl: demoInstaUrl,
+    email: demoEmail,
+    mapsUrl: demoMapsUrl,
+  } = useDemo();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [goal, setGoal] = useState("Build Muscle & Strength");
@@ -57,8 +69,8 @@ export default function ContactPage() {
 
     setIsSubmitted(true);
 
-    const waText = `Hi ${siteConfig.name}! I am reaching out from the website contact page.\n\nName: ${name.trim()}\nPhone: ${phone.trim()}\nGoal: ${goal}${message ? `\nMessage: ${message.trim()}` : ""}`;
-    const whatsappUrl = `https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(waText)}`;
+    const waText = `Hi ${demoName}! I am reaching out from the website contact page.\n\nName: ${name.trim()}\nPhone: ${phone.trim()}\nGoal: ${goal}${message ? `\nMessage: ${message.trim()}` : ""}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(waText)}`;
 
     setTimeout(() => {
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
@@ -66,20 +78,30 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen pt-28 sm:pt-36 bg-[#0B0C0E]">
+    <div
+      style={{ paddingTop: "calc(7rem + var(--demo-h, 0px))" }}
+      className="flex flex-col w-full min-h-screen bg-[#0B0C0E] transition-all duration-300"
+    >
       
       {/* 1. SHORT HERO */}
       <section className="relative w-full pb-12 sm:pb-16">
         <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E4FF1A]" />
-              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#E4FF1A] uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent,#E4FF1A)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-accent,#E4FF1A)] uppercase">
                 GET IN TOUCH
               </span>
             </div>
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.95]">
-              CONNECT WITH <span className="text-[var(--color-headline-accent,#E4FF1A)]">{siteConfig.name}.</span>
+              CONNECT WITH{" "}
+              <span
+                suppressHydrationWarning
+                data-demo="name"
+                className="text-[var(--color-headline-accent,#E4FF1A)]"
+              >
+                {demoName}.
+              </span>
             </h1>
             <p className="mt-4 text-base sm:text-lg text-[#A1A5AD] leading-relaxed">
               Stop by for a tour, ask a question, or talk to an expert coach about your training goals. We are ready when you are.
@@ -141,7 +163,7 @@ export default function ContactPage() {
                           setPhone(e.target.value);
                           if (phoneError) setPhoneError("");
                         }}
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="Your Phone No."
                         className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                           phoneError
                             ? "border-red-500 focus:ring-red-500"
@@ -192,7 +214,7 @@ export default function ContactPage() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#E4FF1A] px-8 py-3.5 text-sm font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow shadow-xl"
+                    className="group flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-8 py-3.5 text-sm font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:bg-[var(--color-accent-hover,#d4ef0e)] active:scale-[0.98] glow-yellow shadow-xl"
                   >
                     <span>SEND VIA WHATSAPP</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -200,7 +222,7 @@ export default function ContactPage() {
                 </form>
               ) : (
                 <div className="py-12 text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#E4FF1A]/20 text-[#E4FF1A]">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/20 text-[var(--color-accent,#E4FF1A)]">
                     <CheckCircle className="h-8 w-8" />
                   </div>
                   <h3 className="font-display text-2xl font-bold uppercase text-white">
@@ -211,7 +233,7 @@ export default function ContactPage() {
                   </p>
                   <div className="mt-6">
                     <a
-                      href={`https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(`Hi ${siteConfig.name}! Name: ${name}, Phone: ${phone}, Goal: ${goal}`)}`}
+                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi ${demoName}! Name: ${name}, Phone: ${phone}, Goal: ${goal}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#25D366] px-6 py-2.5 text-xs font-bold text-white uppercase tracking-wider"
@@ -230,7 +252,7 @@ export default function ContactPage() {
               {/* Hours Card */}
               <div className="rounded-[20px] border border-white/10 bg-[#15171B] p-6 sm:p-8 shadow-xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E4FF1A]/10 text-[#E4FF1A]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)]">
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
@@ -260,7 +282,7 @@ export default function ContactPage() {
               {/* Address Card */}
               <div className="rounded-[20px] border border-white/10 bg-[#15171B] p-6 sm:p-8 shadow-xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E4FF1A]/10 text-[#E4FF1A]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)]">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
@@ -272,19 +294,25 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-3 text-sm border-t border-white/10 pt-4">
-                  <p className="text-gray-200 leading-relaxed font-medium">
-                    {siteConfig.address.full}
+                  <p suppressHydrationWarning data-demo="city" className="text-gray-200 leading-relaxed font-medium">
+                    {demoCity}
                   </p>
                   <div className="flex items-center gap-2 text-xs text-[#A1A5AD]">
-                    <Phone className="h-3.5 w-3.5 text-[#E4FF1A]" />
-                    <a href={`tel:${siteConfig.phoneRaw}`} className="hover:text-white transition-colors">
-                      {siteConfig.phone}
+                    <Phone className="h-3.5 w-3.5 text-[var(--color-accent,#E4FF1A)]" />
+                    <a href={`tel:${demoPhoneRaw}`} className="hover:text-white transition-colors">
+                      <span suppressHydrationWarning data-demo="phone">{demoPhone}</span>
                     </a>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-[#A1A5AD]">
-                    <Mail className="h-3.5 w-3.5 text-[#E4FF1A]" />
-                    <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">
-                      {siteConfig.email}
+                    <Mail className="h-3.5 w-3.5 text-[var(--color-accent,#E4FF1A)]" />
+                    <a href={`mailto:${demoEmail}`} className="hover:text-white transition-colors">
+                      <span suppressHydrationWarning data-demo="email">{demoEmail}</span>
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-[#A1A5AD]">
+                    <span className="text-xs text-[var(--color-accent,#E4FF1A)] font-bold">IG:</span>
+                    <a href={demoInstaUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                      <span suppressHydrationWarning data-demo="insta">@{demoInsta}</span>
                     </a>
                   </div>
                 </div>
@@ -292,7 +320,7 @@ export default function ContactPage() {
 
               {/* Big WhatsApp Quick Action Card */}
               <a
-                href={`https://wa.me/${siteConfig.whatsAppNumber}?text=${encodeURIComponent(`Hi ${siteConfig.name}! I would like to learn more about gym memberships.`)}`}
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi ${demoName}! I would like to learn more about gym memberships.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-between rounded-[20px] border border-[#25D366]/40 bg-gradient-to-r from-[#25D366]/20 to-[#15171B] p-6 shadow-xl transition-all duration-300 hover:border-[#25D366] hover:scale-[1.01]"
@@ -352,14 +380,14 @@ export default function ContactPage() {
                       <MapPin className="h-6 w-6 stroke-[2.5]" />
                     </div>
                     <h3 className="font-display text-2xl font-extrabold uppercase text-white">
-                      {siteConfig.name} HEADQUARTERS
+                      <span suppressHydrationWarning data-demo="name">{demoName}</span> HEADQUARTERS
                     </h3>
-                    <p className="mt-1 text-xs text-[#A1A5AD]">
-                      {siteConfig.address.full}
+                    <p suppressHydrationWarning data-demo="city" className="mt-1 text-xs text-[#A1A5AD]">
+                      {demoCity}
                     </p>
 
                     <a
-                      href={siteConfig.address.mapsUrl}
+                      href={demoMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-4 flex min-h-[44px] items-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[var(--color-cta-text,#0B0C0E)] transition-all hover:brightness-105 active:scale-[0.98] glow-yellow-sm"

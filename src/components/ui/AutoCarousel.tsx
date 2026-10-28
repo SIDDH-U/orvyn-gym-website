@@ -224,7 +224,7 @@ export function AutoCarousel({
               >
                 {isActive && (
                   <span
-                    className="absolute inset-y-0 left-0 bg-[#E4FF1A] rounded-full transition-all duration-75"
+                    className="absolute inset-y-0 left-0 bg-[var(--color-accent,#E4FF1A)] rounded-full transition-all duration-75"
                     style={{ width: `${Math.min(100, progress)}%` }}
                   />
                 )}
@@ -242,7 +242,7 @@ export function AutoCarousel({
                 prevCard();
               }}
               aria-label="Previous slide"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[#E4FF1A] hover:text-[#E4FF1A] active:scale-95"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)] active:scale-95"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -252,7 +252,7 @@ export function AutoCarousel({
                 nextCard();
               }}
               aria-label="Next slide"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[#E4FF1A] hover:text-[#E4FF1A] active:scale-95"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)] active:scale-95"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

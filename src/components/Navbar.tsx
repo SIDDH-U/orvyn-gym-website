@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, MessageSquare } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useModal } from "@/context/ModalContext";
+import { useDemo } from "@/context/DemoContext";
 import { GymLogo } from "@/components/ui/GymLogo";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -40,6 +41,7 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { openModal } = useModal();
+  const demo = useDemo();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
@@ -137,7 +139,7 @@ export function Navbar() {
     setMobileMenuOpen(false);
 
     if (link.isExternalPage) {
-      // Direct page navigation
+      // Direct page navigation with query preservation
       return;
     }
 
@@ -150,9 +152,9 @@ export function Navbar() {
           window.history.pushState(null, "", `#${link.targetId}`);
         }
       } else {
-        // From other pages like /contact or /memberships -> go to /#targetId
+        // From other pages like /contact or /memberships -> go to /#targetId with query params
         e.preventDefault();
-        router.push(`/#${link.targetId}`);
+        router.push(demo.getInternalHref(`/#${link.targetId}`));
       }
     }
   };
@@ -162,7 +164,8 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 transition-transform duration-300 ease-out ${
+        style={{ top: "var(--demo-h, 0px)" }}
+        className={`fixed left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 transition-all duration-300 ease-out ${
           hidden ? "-translate-y-28 pointer-events-none" : "translate-y-0"
         }`}
       >
@@ -172,7 +175,7 @@ export function Navbar() {
         >
           {/* Logo (Scrolls to top on Home, or goes to /) */}
           <Link
-            href="/"
+            href={demo.getInternalHref("/")}
             onClick={(e) => {
               if (pathname === "/") {
                 e.preventDefault();
@@ -180,7 +183,7 @@ export function Navbar() {
                 setActiveSection("");
               }
             }}
-            className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-[#E4FF1A] rounded-full px-2 py-1 shrink-0"
+            className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)] rounded-full px-2 py-1 shrink-0"
           >
             <GymLogo size="md" />
           </Link>
@@ -192,22 +195,24 @@ export function Navbar() {
                 (link.isExternalPage && pathname === link.href) ||
                 (link.targetId && activeSection === link.targetId);
 
+              const resolvedHref = demo.getInternalHref(link.href);
+
               return (
                 <Link
                   key={link.label}
-                  href={link.href}
+                  href={resolvedHref}
                   onClick={(e) => handleNavClick(e, link)}
-                  className={`relative py-1 text-xs xl:text-[13px] font-semibold tracking-wider uppercase transition-colors hover:text-[#E4FF1A] focus:outline-none focus:ring-1 focus:ring-[#E4FF1A] rounded ${
-                    isActive ? "text-[#E4FF1A]" : "text-[#A1A5AD]"
+                  className={`relative py-1 text-xs xl:text-[13px] font-semibold tracking-wider uppercase transition-colors hover:text-[var(--color-accent,#E4FF1A)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent,#E4FF1A)] rounded ${
+                    isActive ? "text-[var(--color-accent,#E4FF1A)]" : "text-[#A1A5AD]"
                   }`}
                 >
                   <span>{link.label}</span>
-                  {/* Sliding yellow underline indicator */}
+                  {/* Sliding yellow/accent underline indicator */}
                   {isActive && (
                     <motion.span
                       layoutId="activeNavIndicator"
                       transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#E4FF1A] rounded-full shadow-[0_0_8px_rgba(228,255,26,0.6)]"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color-accent,#E4FF1A)] rounded-full shadow-[0_0_8px_var(--color-glow,rgba(228,255,26,0.6))]"
                     />
                   )}
                 </Link>
@@ -219,7 +224,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => openModal()}
-              className="group hidden sm:inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-full bg-[#E4FF1A] px-5 py-2 text-xs font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] active:scale-[0.98] glow-yellow-sm"
+              className="group hidden sm:inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta,#E4FF1A)] px-5 py-2 text-xs font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:bg-[var(--color-accent-hover,#d4ef0e)] active:scale-[0.98] glow-yellow-sm"
             >
               <span>JOIN NOW</span>
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -228,7 +233,7 @@ export function Navbar() {
             {/* Mobile/Tablet Hamburger (Switches below 1024px) */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#E4FF1A]"
+              className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)]"
               aria-label="Open mobile navigation menu"
             >
               <Menu className="h-5 w-5" />
@@ -250,7 +255,7 @@ export function Navbar() {
             {/* Top Bar inside overlay */}
             <div className="flex items-center justify-between border-b border-white/10 pb-5">
               <Link
-                href="/"
+                href={demo.getInternalHref("/")}
                 onClick={(e) => {
                   setMobileMenuOpen(false);
                   if (pathname === "/") {
@@ -266,7 +271,7 @@ export function Navbar() {
 
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#E4FF1A]"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)]"
                 aria-label="Close mobile menu"
               >
                 <X className="h-6 w-6" />
@@ -289,16 +294,16 @@ export function Navbar() {
                     transition={{ delay: 0.05 * idx, duration: 0.25 }}
                   >
                     <Link
-                      href={link.href}
+                      href={demo.getInternalHref(link.href)}
                       onClick={(e) => handleNavClick(e, link)}
                       className="group flex items-baseline gap-4 py-1.5"
                     >
-                      <span className="text-xs font-mono font-bold text-[#E4FF1A]">
+                      <span className="text-xs font-mono font-bold text-[var(--color-accent,#E4FF1A)]">
                         {num}
                       </span>
                       <span
                         className={`font-display text-3xl sm:text-4xl font-extrabold tracking-tight uppercase transition-colors ${
-                          isActive ? "text-[#E4FF1A]" : "text-white/85 group-hover:text-white"
+                          isActive ? "text-[var(--color-accent,#E4FF1A)]" : "text-white/85 group-hover:text-white"
                         }`}
                       >
                         {link.label}
@@ -321,7 +326,7 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                   openModal();
                 }}
-                className="group flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[#E4FF1A] py-3.5 text-sm font-extrabold tracking-wider uppercase text-[#0B0C0E] transition-all hover:bg-[#d4ef0e] glow-yellow active:scale-[0.98]"
+                className="group flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[var(--color-cta,#E4FF1A)] py-3.5 text-sm font-extrabold tracking-wider uppercase text-[var(--color-cta-text,#0B0C0E)] transition-all hover:bg-[var(--color-accent-hover,#d4ef0e)] glow-yellow active:scale-[0.98]"
               >
                 <span>JOIN NOW — FREE PASS</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -330,21 +335,21 @@ export function Navbar() {
               <div className="flex items-center justify-between text-xs text-[#A1A5AD] px-1">
                 <span>{siteConfig.hours.monFri}</span>
                 <a
-                  href={`tel:${siteConfig.phoneRaw}`}
-                  className="text-[#E4FF1A] hover:underline font-bold"
+                  href={`tel:${demo.phoneRaw}`}
+                  className="text-[var(--color-accent,#E4FF1A)] hover:underline font-bold"
                 >
-                  {siteConfig.phone}
+                  <span suppressHydrationWarning data-demo="phone">{demo.phone}</span>
                 </a>
               </div>
 
               {/* Socials Row */}
               <div className="flex items-center justify-center gap-4 pt-2">
                 <a
-                  href="https://instagram.com"
+                  href={demo.instaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[#E4FF1A]"
-                  aria-label="Instagram"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[var(--color-accent,#E4FF1A)]"
+                  aria-label={`Instagram: @${demo.insta}`}
                 >
                   <InstagramIcon className="h-4 w-4" />
                 </a>
@@ -352,7 +357,7 @@ export function Navbar() {
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[#E4FF1A]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[var(--color-accent,#E4FF1A)]"
                   aria-label="YouTube"
                 >
                   <YoutubeIcon className="h-4 w-4" />
@@ -361,13 +366,13 @@ export function Navbar() {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[#E4FF1A]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-[var(--color-accent,#E4FF1A)]"
                   aria-label="Facebook"
                 >
                   <FacebookIcon className="h-4 w-4" />
                 </a>
                 <a
-                  href={`https://wa.me/${siteConfig.whatsAppNumber}`}
+                  href={`https://wa.me/${demo.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-black"

@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 import { GymLogo } from "@/components/ui/GymLogo";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -43,6 +44,18 @@ function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Footer() {
   const currentYear = 2026;
+  const {
+    name,
+    city,
+    phone,
+    phoneRaw,
+    whatsappNumber,
+    insta,
+    instaUrl,
+    email,
+    mapsUrl,
+    getInternalHref,
+  } = useDemo();
 
   return (
     <footer id="footer" className="relative border-t border-white/10 bg-[#0B0C0E] text-[#A1A5AD] pt-12 pb-24 md:pb-14">
@@ -51,7 +64,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12 pb-10 border-b border-white/5">
           {/* Col 1: Brand & Socials */}
           <div className="col-span-2 md:col-span-1 space-y-3.5">
-            <Link href="/" className="inline-flex items-center gap-2 group">
+            <Link href={getInternalHref("/")} className="inline-flex items-center gap-2 group">
               <GymLogo size="md" showSubtitle />
             </Link>
             <p className="text-xs text-[#A1A5AD] leading-relaxed max-w-sm">
@@ -61,11 +74,11 @@ export function Footer() {
             {/* Social Icons with real WhatsApp in accent color */}
             <div className="flex items-center gap-2.5 pt-1">
               <a
-                href="https://instagram.com"
+                href={instaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[#E4FF1A] hover:text-[#E4FF1A]"
-                aria-label="Instagram"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)]"
+                aria-label={`Instagram: @${insta}`}
               >
                 <InstagramIcon className="h-3.5 w-3.5" />
               </a>
@@ -73,7 +86,7 @@ export function Footer() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[#E4FF1A] hover:text-[#E4FF1A]"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)]"
                 aria-label="YouTube"
               >
                 <YoutubeIcon className="h-3.5 w-3.5" />
@@ -82,16 +95,16 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[#E4FF1A] hover:text-[#E4FF1A]"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-accent,#E4FF1A)]"
                 aria-label="Facebook"
               >
                 <FacebookIcon className="h-3.5 w-3.5" />
               </a>
               <a
-                href={`https://wa.me/${siteConfig.whatsAppNumber}`}
+                href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E4FF1A]/30 bg-[#E4FF1A]/10 text-[#E4FF1A] transition-colors hover:bg-[#E4FF1A] hover:text-[#0B0C0E]"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-accent,#E4FF1A)]/30 bg-[var(--color-accent,#E4FF1A)]/10 text-[var(--color-accent,#E4FF1A)] transition-colors hover:bg-[var(--color-accent,#E4FF1A)] hover:text-[var(--color-cta-text,#0B0C0E)]"
                 aria-label="WhatsApp"
               >
                 <WhatsAppIcon className="h-4 w-4" />
@@ -107,47 +120,47 @@ export function Footer() {
             <ul className="space-y-1.5 text-xs sm:text-sm">
               {siteConfig.sections.showAbout && (
                 <li>
-                  <Link href="/#about" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                  <Link href={getInternalHref("/#about")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                     About
                   </Link>
                 </li>
               )}
               {siteConfig.sections.showPrograms && (
                 <li>
-                  <Link href="/#programs" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                  <Link href={getInternalHref("/#programs")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                     Programs
                   </Link>
                 </li>
               )}
               {siteConfig.sections.showCoaches && (
                 <li>
-                  <Link href="/#coaches" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                  <Link href={getInternalHref("/#coaches")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                     Coaches
                   </Link>
                 </li>
               )}
               {siteConfig.sections.showMemberships && (
                 <li>
-                  <Link href="/#plans" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                  <Link href={getInternalHref("/#plans")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                     Memberships
                   </Link>
                 </li>
               )}
               {siteConfig.sections.showReviews && (
                 <li>
-                  <Link href="/#reviews" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                  <Link href={getInternalHref("/#reviews")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                     Reviews
                   </Link>
                 </li>
               )}
               <li>
-                <Link href="/contact" className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
+                <Link href={getInternalHref("/contact")} className="hover:text-[var(--color-accent,#E4FF1A)] transition-colors">
                   Contact
                 </Link>
               </li>
               {siteConfig.sections.showMemberships && (
                 <li className="pt-1">
-                  <Link href="/memberships" className="text-[var(--color-accent,#E4FF1A)] hover:underline font-semibold flex items-center gap-1">
+                  <Link href={getInternalHref("/memberships")} className="text-[var(--color-accent,#E4FF1A)] hover:underline font-semibold flex items-center gap-1">
                     <span>Compare plans</span>
                     <ArrowUpRight className="h-3 w-3" />
                   </Link>
@@ -184,29 +197,40 @@ export function Footer() {
             </h4>
             <div className="space-y-2 text-xs sm:text-sm">
               <a
-                href={`tel:${siteConfig.phoneRaw}`}
-                className="flex items-center gap-2 text-white hover:text-[#E4FF1A] transition-colors"
+                href={`tel:${phoneRaw}`}
+                className="flex items-center gap-2 text-white hover:text-[var(--color-accent,#E4FF1A)] transition-colors"
               >
-                <Phone className="h-3.5 w-3.5 text-[#E4FF1A]" />
-                <span>{siteConfig.phone}</span>
+                <Phone className="h-3.5 w-3.5 text-[var(--color-accent,#E4FF1A)]" />
+                <span suppressHydrationWarning data-demo="phone">{phone}</span>
               </a>
               <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-2 hover:text-[#E4FF1A] transition-colors"
+                href={`mailto:${email}`}
+                className="flex items-center gap-2 hover:text-[var(--color-accent,#E4FF1A)] transition-colors"
               >
-                <Mail className="h-3.5 w-3.5 text-[#E4FF1A]" />
-                <span className="truncate">{siteConfig.email}</span>
+                <Mail className="h-3.5 w-3.5 text-[var(--color-accent,#E4FF1A)]" />
+                <span suppressHydrationWarning data-demo="email" className="truncate">{email}</span>
               </a>
               <div className="flex items-start gap-2 pt-0.5">
-                <MapPin className="h-3.5 w-3.5 shrink-0 text-[#E4FF1A] mt-0.5" />
-                <span className="text-xs text-gray-300">{siteConfig.address.full}</span>
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-[var(--color-accent,#E4FF1A)] mt-0.5" />
+                <span suppressHydrationWarning data-demo="city" className="text-xs text-gray-300">{city}</span>
+              </div>
+              <div className="flex items-center gap-2 pt-0.5">
+                <InstagramIcon className="h-3.5 w-3.5 shrink-0 text-[var(--color-accent,#E4FF1A)]" />
+                <a
+                  href={instaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-300 hover:text-[var(--color-accent,#E4FF1A)] transition-colors"
+                >
+                  <span suppressHydrationWarning data-demo="insta">@{insta}</span>
+                </a>
               </div>
               <div className="pt-1.5">
                 <a
-                  href={siteConfig.address.mapsUrl}
+                  href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#E4FF1A] hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[var(--color-accent,#E4FF1A)] hover:underline"
                 >
                   <span>Open in Maps</span>
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -218,7 +242,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 text-xs text-gray-500">
-          <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
+          <p>© {currentYear} <span suppressHydrationWarning data-demo="name">{name}</span>. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <span className="hover:text-gray-400 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-gray-400 cursor-pointer">Terms & Conditions</span>
