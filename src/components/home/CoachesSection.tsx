@@ -20,7 +20,7 @@ function CoachCard({
   return (
     <div
       onClick={onClick}
-      className="group relative w-full rounded-[20px] overflow-hidden border border-white/10 bg-[#15171B] cursor-pointer shadow-xl transition-all duration-300 hover:border-[#E4FF1A]/60 hover:-translate-y-1.5"
+      className="group relative w-full rounded-[20px] overflow-hidden border border-white/10 bg-[#15171B] cursor-pointer shadow-xl transition-all duration-300 hover:border-[var(--color-accent,#E4FF1A)]/60 hover:-translate-y-1.5"
     >
       {/* Coach Photo (4:5 aspect ratio) with Initials Fallback */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-b from-[#15171B] to-[#0B0C0E]">
@@ -34,23 +34,23 @@ function CoachCard({
         />
 
         {/* Initials Badge fallback / overlay */}
-        <div className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 border border-white/15 text-[11px] font-extrabold text-[#E4FF1A] backdrop-blur-md">
+        <div className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 border border-white/15 text-[11px] font-extrabold text-[var(--color-accent,#E4FF1A)] backdrop-blur-md">
           {coach.initials}
         </div>
       </div>
 
       {/* Coach Info */}
       <div className="p-4 sm:p-5 bg-[#15171B]">
-        <h3 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-[#E4FF1A] transition-colors leading-tight">
+        <h3 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-[var(--color-accent,#E4FF1A)] transition-colors leading-tight">
           {coach.name}
         </h3>
-        <p className="mt-1 text-xs font-semibold text-[#E4FF1A] uppercase tracking-wide">
+        <p className="mt-1 text-xs font-semibold text-[var(--color-accent,#E4FF1A)] uppercase tracking-wide">
           {coach.speciality}
         </p>
 
         {/* Credentials line: WRAPS (no ellipsis) */}
         <div className="mt-2.5 flex items-start gap-1.5 border-t border-white/10 pt-2.5 text-[11px] text-[#A1A5AD] leading-tight">
-          <Award className="h-3.5 w-3.5 text-[#E4FF1A] shrink-0 mt-0.5" />
+          <Award className="h-3.5 w-3.5 text-[var(--color-accent,#E4FF1A)] shrink-0 mt-0.5" />
           <span className="break-words">{coach.certification}</span>
         </div>
       </div>

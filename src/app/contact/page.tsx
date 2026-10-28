@@ -143,7 +143,7 @@ export default function ContactPage() {
                         className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                           nameError
                             ? "border-red-500 focus:ring-red-500"
-                            : "border-white/10 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                            : "border-white/10 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                         }`}
                       />
                       {nameError && (
@@ -167,7 +167,7 @@ export default function ContactPage() {
                         className={`w-full rounded-xl border bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:outline-none focus:ring-2 ${
                           phoneError
                             ? "border-red-500 focus:ring-red-500"
-                            : "border-white/10 focus:border-[#E4FF1A] focus:ring-[#E4FF1A]/30"
+                            : "border-white/10 focus:border-[var(--color-accent,#E4FF1A)] focus:ring-[var(--color-accent,#E4FF1A)]/30"
                         }`}
                       />
                       {phoneError && (
@@ -185,7 +185,7 @@ export default function ContactPage() {
                       <select
                         value={goal}
                         onChange={(e) => setGoal(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white transition-colors focus:border-[#E4FF1A] focus:outline-none focus:ring-2 focus:ring-[#E4FF1A]/30 appearance-none cursor-pointer"
+                        className="w-full rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white transition-colors focus:border-[var(--color-accent,#E4FF1A)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)]/30 appearance-none cursor-pointer"
                       >
                         {goalOptions.map((opt) => (
                           <option key={opt} value={opt} className="bg-[#15171B] text-white">
@@ -207,7 +207,7 @@ export default function ContactPage() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Tell us about your training experience or questions..."
-                      className="w-full rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#E4FF1A] focus:outline-none focus:ring-2 focus:ring-[#E4FF1A]/30 resize-none"
+                      className="w-full rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white placeholder-gray-500 transition-colors focus:border-[var(--color-accent,#E4FF1A)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent,#E4FF1A)]/30 resize-none"
                     />
                   </div>
 
